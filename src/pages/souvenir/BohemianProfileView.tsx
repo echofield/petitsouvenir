@@ -5,7 +5,7 @@
  */
 
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
 import { MapSection, MapSectionPlace } from '../../components/souvenir/MapSection';
 import { BohemianPlaceDetailSheet } from '../../components/souvenir/BohemianPlaceDetailSheet';
@@ -18,7 +18,8 @@ import { isProfileUnlocked, STRIPE_PAYMENT_LINK, unlockProfile } from '../../uti
 import { hasProof } from '../../utils/souvenir-proof';
 
 export default function BohemianProfileView() {
-  const { profile: profileId } = useParams<{ profile: string }>();
+  // This is a fixed route /souvenir/bohemian, so profileId is always 'bohemian'
+  const profileId = 'bohemian';
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const companionsRef = useRef<HTMLDivElement>(null);
@@ -27,22 +28,19 @@ export default function BohemianProfileView() {
   const [questSavedEvent, setQuestSavedEvent] = useState(0);
 
   const profileData = useMemo(() => {
-    if (profileId === 'bohemian') {
-      return getBohemianProfile();
-    }
-    return null;
-  }, [profileId]);
+    return getBohemianProfile();
+  }, []);
 
-  const unlocked = profileId ? isProfileUnlocked(profileId as 'bohemian' | 'family' | 'night') : false;
+  const unlocked = isProfileUnlocked(profileId as 'bohemian' | 'family' | 'night');
 
   // Handle unlock query param (for testing / Stripe redirect)
   useEffect(() => {
-    if (profileId && searchParams.get('unlock') === 'true') {
+    if (searchParams.get('unlock') === 'true') {
       unlockProfile(profileId as 'bohemian' | 'family' | 'night');
       setSearchParams({});
       window.location.reload();
     }
-  }, [profileId, searchParams, setSearchParams]);
+  }, [searchParams, setSearchParams]);
 
   // Handle quest save events
   useEffect(() => {
@@ -102,7 +100,7 @@ export default function BohemianProfileView() {
     setSelectedPlace(null);
   };
 
-  if (!profileData || profileId !== 'bohemian') {
+  if (!profileData) {
     return (
       <>
         <BackButton onBack={() => navigate('/souvenir')} label="Back" />
@@ -367,7 +365,7 @@ export default function BohemianProfileView() {
       )}
 
       {/* Quests Section */}
-      {showQuests && profileData.quests.length > 0 && profileId && (
+      {showQuests && profileData.quests.length > 0 && (
         <QuestsSection 
           quests={profileData.quests} 
           archetypeId={profileId}
