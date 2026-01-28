@@ -1,0 +1,170 @@
+[
+  {
+    "id": "ECHO_01",
+    "zone": "Seine",
+    "era_tag": ["origines"],
+    "theme": ["eau","passage"],
+    "echo": "Avant les ponts, on traversait ici en regardant le courant comme une décision."
+  },
+  {
+    "id": "ECHO_02",
+    "zone": "Île de la Cité",
+    "era_tag": ["ancien"],
+    "theme": ["pouvoir","sacré"],
+    "echo": "Le centre n'était pas géographique, il était symbolique."
+  },
+  {
+    "id": "ECHO_03",
+    "zone": "Pont Neuf",
+    "era_tag": ["transition"],
+    "theme": ["foule","regard"],
+    "echo": "Ici, on venait autant pour voir que pour être vu."
+  },
+  {
+    "id": "ECHO_04",
+    "zone": "Louvre",
+    "era_tag": ["autorité"],
+    "theme": ["ordre","distance"],
+    "echo": "Le pouvoir se mesurait à la longueur du regard."
+  },
+  {
+    "id": "ECHO_05",
+    "zone": "Tuileries",
+    "era_tag": ["discipline"],
+    "theme": ["axe","marche"],
+    "echo": "Marcher droit était déjà une manière d'obéir."
+  },
+  {
+    "id": "ECHO_06",
+    "zone": "Les Halles",
+    "era_tag": ["travail"],
+    "theme": ["effort","corps"],
+    "echo": "La ville se nourrissait ici avant de penser."
+  },
+  {
+    "id": "ECHO_07",
+    "zone": "Marais",
+    "era_tag": ["strates"],
+    "theme": ["silence","héritage"],
+    "echo": "Chaque mur cache une époque qui refuse de partir."
+  },
+  {
+    "id": "ECHO_08",
+    "zone": "Faubourg Saint-Antoine",
+    "era_tag": ["main","matière"],
+    "theme": ["artisanat"],
+    "echo": "Le bois parlait avant les discours."
+  },
+  {
+    "id": "ECHO_09",
+    "zone": "Bastille",
+    "era_tag": ["rupture"],
+    "theme": ["vide","mémoire"],
+    "echo": "L'absence peut devenir un monument."
+  },
+  {
+    "id": "ECHO_10",
+    "zone": "République",
+    "era_tag": ["rassemblement"],
+    "theme": ["voix","foule"],
+    "echo": "Quand les corps s'alignent, la ville écoute."
+  },
+  {
+    "id": "ECHO_11",
+    "zone": "Grands Boulevards",
+    "era_tag": ["vitesse"],
+    "theme": ["mouvement","flux"],
+    "echo": "La ligne droite a remplacé le détour."
+  },
+  {
+    "id": "ECHO_12",
+    "zone": "Passages couverts",
+    "era_tag": ["entre-deux"],
+    "theme": ["abri","regard"],
+    "echo": "Ni dedans ni dehors, mais protégé."
+  },
+  {
+    "id": "ECHO_13",
+    "zone": "Saint-Germain",
+    "era_tag": ["esprit"],
+    "theme": ["parole","temps"],
+    "echo": "On y parlait longtemps pour éviter d'agir trop vite."
+  },
+  {
+    "id": "ECHO_14",
+    "zone": "Quartier Latin",
+    "era_tag": ["savoir"],
+    "theme": ["langue","transmission"],
+    "echo": "Les mots y marchaient plus lentement que les idées."
+  },
+  {
+    "id": "ECHO_15",
+    "zone": "Montmartre",
+    "era_tag": ["hauteur"],
+    "theme": ["vue","marge"],
+    "echo": "Être en haut, c'était déjà s'écarter."
+  },
+  {
+    "id": "ECHO_16",
+    "zone": "Belleville",
+    "era_tag": ["mélange"],
+    "theme": ["arrivée","adaptation"],
+    "echo": "Ici, personne ne vient de nulle part."
+  },
+  {
+    "id": "ECHO_17",
+    "zone": "Canal Saint-Martin",
+    "era_tag": ["industrie"],
+    "theme": ["attente","pause"],
+    "echo": "L'eau y apprend à patienter."
+  },
+  {
+    "id": "ECHO_18",
+    "zone": "Gares",
+    "era_tag": ["départ"],
+    "theme": ["rupture","espoir"],
+    "echo": "Chaque quai promet une autre version de soi."
+  },
+  {
+    "id": "ECHO_19",
+    "zone": "Invalides",
+    "era_tag": ["mémoire"],
+    "theme": ["corps","silence"],
+    "echo": "La gloire repose quand le bruit cesse."
+  },
+  {
+    "id": "ECHO_20",
+    "zone": "Concorde",
+    "era_tag": ["équilibre"],
+    "theme": ["centre","tension"],
+    "echo": "L'ordre tente toujours de remplacer la peur."
+  },
+  {
+    "id": "ECHO_21",
+    "zone": "Champs-Élysées",
+    "era_tag": ["mise-en-scène"],
+    "theme": ["marche","regard"],
+    "echo": "On avance ici comme dans une image."
+  },
+  {
+    "id": "ECHO_22",
+    "zone": "Arc",
+    "era_tag": ["seuil"],
+    "theme": ["passage","verticalité"],
+    "echo": "Traverser, c'est déjà croire."
+  },
+  {
+    "id": "ECHO_23",
+    "zone": "Père-Lachaise",
+    "era_tag": ["temps"],
+    "theme": ["repos","mémoire"],
+    "echo": "La ville parle moins fort ici."
+  },
+  {
+    "id": "ECHO_24",
+    "zone": "Paris",
+    "era_tag": ["continu"],
+    "theme": ["marche","présence"],
+    "echo": "Marcher, c'est lire sans tourner les pages."
+  }
+]
