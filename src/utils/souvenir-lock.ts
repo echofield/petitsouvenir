@@ -19,7 +19,9 @@ export function getUnlockedProfiles(): SouvenirProfileId[] {
 }
 
 export function isProfileUnlocked(profileId: SouvenirProfileId): boolean {
-  return getUnlockedProfiles().includes(profileId);
+  // TEMP: Unlock all profiles for testing
+  // TODO: Remove this and use actual unlock check: return getUnlockedProfiles().includes(profileId);
+  return true;
 }
 
 export function unlockProfile(profileId: SouvenirProfileId): void {
