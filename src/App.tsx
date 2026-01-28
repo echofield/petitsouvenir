@@ -14,6 +14,18 @@ import Gift from './pages/souvenir/Gift';
 import About from './pages/souvenir/About';
 import ArcheShell from './pages/arche/ArcheShell';
 
+// Dev helper (only in development)
+if (import.meta.env.DEV) {
+  import('./utils/souvenir-resonance').then(({ loadResonance }) => {
+    (window as any).SOUVENIR = {
+      resonance: loadResonance,
+      exportTrace: () => {
+        import('./utils/souvenir-export').then(({ exportTrace }) => exportTrace());
+      },
+    };
+  });
+}
+
 export default function App() {
   return (
     <>

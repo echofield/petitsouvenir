@@ -9,6 +9,7 @@ import { BackButton } from '../../components/BackButton';
 import { MapSection, MapSectionPlace } from '../../components/souvenir/MapSection';
 import { getSouvenirPlaceById } from '../../data/souvenir-places';
 import { loadMyParis, removePlace, saveNote } from '../../utils/souvenir-storage';
+import { exportTrace } from '../../utils/souvenir-export';
 
 export default function MyParis() {
   const navigate = useNavigate();
@@ -160,6 +161,32 @@ export default function MyParis() {
           >
             Saved on this device.
           </p>
+          <button
+            type="button"
+            onClick={exportTrace}
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 9,
+              fontWeight: 400,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#2B2B2B',
+              opacity: 0.4,
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              marginTop: 16,
+              textDecoration: 'underline',
+              textDecorationThickness: '0.5px',
+              textUnderlineOffset: '2px',
+              transition: 'opacity 300ms ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
+          >
+            Export trace
+          </button>
         </div>
       </section>
     </>
