@@ -521,7 +521,7 @@ export function BohemianPlaceDetailSheet({
                     marginBottom: 12,
                   }}
                 >
-                  ✓ Proof completed
+                  <span style={{ color: '#C9A961', opacity: 0.9 }}>✓</span> Proof completed
                 </p>
                 {proof?.note && (
                   <p

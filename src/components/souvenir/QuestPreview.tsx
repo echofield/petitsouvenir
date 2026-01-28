@@ -55,7 +55,7 @@ export function QuestPreview({ quest, archetypeId, onSaveChange }: QuestPreviewP
               fontFamily: 'Cormorant Garamond, Georgia, serif',
               fontSize: 20,
               fontWeight: 500,
-              color: '#2B2B2B',
+              color: '#0E3F2F',
               marginBottom: 6,
               lineHeight: 1.3,
             }}
@@ -80,8 +80,8 @@ export function QuestPreview({ quest, archetypeId, onSaveChange }: QuestPreviewP
           <span
             style={{
               fontSize: 14,
-              color: '#2B2B2B',
-              opacity: 0.4,
+              color: '#C9A961',
+              opacity: 0.9,
             }}
           >
             ✓
@@ -101,19 +101,18 @@ export function QuestPreview({ quest, archetypeId, onSaveChange }: QuestPreviewP
             textTransform: 'uppercase',
             padding: '8px 16px',
             background: 'transparent',
-            color: '#2B2B2B',
-            border: '0.5px solid rgba(43, 43, 43, 0.2)',
+            color: '#0E3F2F',
+            border: '0.5px solid rgba(14, 63, 47, 0.3)',
             textDecoration: 'none',
             transition: 'all 300ms ease',
-            opacity: 0.7,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.9';
-            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
+            e.currentTarget.style.opacity = '0.8';
+            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.7';
-            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
+            e.currentTarget.style.opacity = '1';
+            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
           }}
         >
           Directions
@@ -128,23 +127,26 @@ export function QuestPreview({ quest, archetypeId, onSaveChange }: QuestPreviewP
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             padding: '8px 16px',
-            background: saved ? 'rgba(43, 43, 43, 0.1)' : 'transparent',
-            color: '#2B2B2B',
-            border: saved ? 'none' : '0.5px solid rgba(43, 43, 43, 0.2)',
+            background: saved ? '#0E3F2F' : 'transparent',
+            color: saved ? '#FAF9F6' : '#0E3F2F',
+            border: saved ? 'none' : '0.5px solid rgba(14, 63, 47, 0.3)',
             cursor: 'pointer',
             transition: 'all 300ms ease',
-            opacity: saved ? 0.8 : 0.7,
           }}
           onMouseEnter={(e) => {
             if (!saved) {
-              e.currentTarget.style.opacity = '0.9';
-              e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
+              e.currentTarget.style.opacity = '0.8';
+              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+            } else {
+              e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)';
             }
           }}
           onMouseLeave={(e) => {
             if (!saved) {
-              e.currentTarget.style.opacity = '0.7';
-              e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+            } else {
+              e.currentTarget.style.background = '#0E3F2F';
             }
           }}
         >

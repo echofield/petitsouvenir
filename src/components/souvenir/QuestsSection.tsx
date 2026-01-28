@@ -29,7 +29,7 @@ export function QuestsSection({ quests, archetypeId, onQuestSaveChange }: Quests
           fontSize: 32,
           fontWeight: 500,
           letterSpacing: '0.02em',
-          color: '#2B2B2B',
+          color: '#0E3F2F',
           marginBottom: 40,
           lineHeight: 1.3,
         }}

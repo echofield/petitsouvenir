@@ -22,7 +22,7 @@ export function CategorySwitcher({ categories, selected, onSelect }: CategorySwi
         flexWrap: 'wrap',
         marginBottom: 32,
         paddingBottom: 24,
-        borderBottom: '0.5px solid rgba(43, 43, 43, 0.1)',
+        borderBottom: '0.5px solid rgba(14, 63, 47, 0.2)',
       }}
     >
       <button
@@ -34,10 +34,10 @@ export function CategorySwitcher({ categories, selected, onSelect }: CategorySwi
           fontWeight: selected === null ? 500 : 400,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: selected === null ? '#2B2B2B' : '#2B2B2B',
+          color: selected === null ? '#0E3F2F' : '#2B2B2B',
           background: 'transparent',
           border: 'none',
-          borderBottom: selected === null ? '0.5px solid rgba(43, 43, 43, 0.3)' : '0.5px solid transparent',
+          borderBottom: selected === null ? '0.5px solid #0E3F2F' : '0.5px solid transparent',
           padding: '8px 0',
           cursor: 'pointer',
           transition: 'all 300ms ease',

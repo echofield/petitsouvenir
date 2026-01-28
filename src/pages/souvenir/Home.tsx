@@ -24,7 +24,7 @@ export default function SouvenirHome() {
             fontSize: 48,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: '#2B2B2B',
+            color: '#0E3F2F',
             marginBottom: 12,
             lineHeight: 1.2,
           }}
@@ -55,22 +55,22 @@ export default function SouvenirHome() {
             fontWeight: 500,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: '#2B2B2B',
+            color: '#0E3F2F',
             textDecoration: 'none',
-            border: '0.5px solid rgba(43, 43, 43, 0.2)',
+            border: '0.5px solid rgba(14, 63, 47, 0.25)',
             padding: '14px 32px',
             display: 'inline-block',
             transition: 'all 300ms ease',
-            opacity: 0.8,
+            opacity: 0.9,
             background: 'transparent',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.opacity = '1';
-            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
+            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.4)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.8';
-            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
+            e.currentTarget.style.opacity = '0.9';
+            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.25)';
           }}
         >
           Choose a profile

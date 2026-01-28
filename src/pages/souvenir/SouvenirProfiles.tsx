@@ -29,7 +29,7 @@ export default function SouvenirProfiles() {
             fontSize: 36,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: '#2B2B2B',
+            color: '#0E3F2F',
             marginBottom: 60,
             lineHeight: 1.3,
             textAlign: 'center',
@@ -73,7 +73,7 @@ export default function SouvenirProfiles() {
                         fontFamily: 'Cormorant Garamond, Georgia, serif',
                         fontSize: 28,
                         fontWeight: 500,
-                        color: '#2B2B2B',
+                        color: '#0E3F2F',
                         marginBottom: 8,
                         lineHeight: 1.3,
                       }}
@@ -216,21 +216,21 @@ export default function SouvenirProfiles() {
                         textTransform: 'uppercase',
                         padding: '14px 28px',
                         background: unlocked ? '#0E3F2F' : 'transparent',
-                          color: unlocked ? '#FAF9F6' : '#2B2B2B',
-                          border: unlocked ? 'none' : '0.5px solid rgba(43, 43, 43, 0.2)',
+                          color: unlocked ? '#FAF9F6' : '#0E3F2F',
+                          border: unlocked ? 'none' : '0.5px solid rgba(14, 63, 47, 0.3)',
                           cursor: unlocked ? 'pointer' : 'default',
                           transition: 'all 400ms ease',
-                          opacity: unlocked ? 0.9 : 0.5,
-                          background: unlocked ? 'rgba(43, 43, 43, 0.1)' : 'transparent',
+                          opacity: unlocked ? 1 : 0.7,
+                          background: unlocked ? '#0E3F2F' : 'transparent',
                         }}
                         onMouseEnter={(e) => {
                           if (unlocked) {
-                            e.currentTarget.style.background = 'rgba(43, 43, 43, 0.15)';
+                            e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)';
                           }
                         }}
                         onMouseLeave={(e) => {
                           if (unlocked) {
-                            e.currentTarget.style.background = 'rgba(43, 43, 43, 0.1)';
+                            e.currentTarget.style.background = '#0E3F2F';
                           }
                         }}
                     >

@@ -43,7 +43,7 @@ export function Header() {
             fontSize: 20,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: '#2B2B2B',
+            color: '#C9A961',
             textDecoration: 'none',
             opacity: 0.9,
           }}
