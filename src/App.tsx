@@ -4,6 +4,8 @@
  */
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Header } from './components/souvenir/Header';
+import { Footer } from './components/souvenir/Footer';
 import SouvenirHome from './pages/souvenir/Home';
 import SouvenirProfiles from './pages/souvenir/SouvenirProfiles';
 import ProfileMapView from './pages/souvenir/ProfileMapView';
@@ -51,21 +53,27 @@ export default function App() {
           background: '#FAF9F6',
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E")`,
           color: '#2B2B2B',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<SouvenirHome />} />
-            <Route path="/souvenir" element={<SouvenirProfiles />} />
-            <Route path="/souvenir/bohemian" element={<BohemianProfileView />} />
-            <Route path="/souvenir/:profile" element={<ProfileMapView />} />
-            <Route path="/create" element={<MyParis />} />
-            <Route path="/share" element={<SharePage />} />
-            <Route path="/gift" element={<Gift />} />
-            <Route path="/about" element={<About />} />
-            {/* Preserve /arche — cultural core. Never remove. Not for users — for you. */}
-            <Route path="/arche" element={<ArcheShell />} />
-          </Routes>
+          <Header />
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<SouvenirHome />} />
+              <Route path="/souvenir" element={<SouvenirProfiles />} />
+              <Route path="/souvenir/bohemian" element={<BohemianProfileView />} />
+              <Route path="/souvenir/:profile" element={<ProfileMapView />} />
+              <Route path="/create" element={<MyParis />} />
+              <Route path="/share" element={<SharePage />} />
+              <Route path="/gift" element={<Gift />} />
+              <Route path="/about" element={<About />} />
+              {/* Preserve /arche — cultural core. Never remove. Not for users — for you. */}
+              <Route path="/arche" element={<ArcheShell />} />
+            </Routes>
+          </div>
+          <Footer />
         </BrowserRouter>
       </div>
     </>

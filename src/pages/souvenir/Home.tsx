@@ -1,6 +1,6 @@
 /**
  * Petit Souvenir — Home (/)
- * Map only, title, subtitle, three entry actions.
+ * Entry page: threshold structure with brand gravity.
  */
 
 import { Link } from 'react-router-dom';
@@ -9,11 +9,12 @@ import { MapSection } from '../../components/souvenir/MapSection';
 export default function SouvenirHome() {
   return (
     <>
+      {/* Title and Subtitle */}
       <section
         style={{
           maxWidth: 680,
           margin: '0 auto',
-          padding: '100px 40px 20px',
+          padding: '80px 40px 40px',
           textAlign: 'center',
         }}
       >
@@ -23,7 +24,7 @@ export default function SouvenirHome() {
             fontSize: 48,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: '#0E3F2F',
+            color: '#2B2B2B',
             marginBottom: 12,
             lineHeight: 1.2,
           }}
@@ -38,101 +39,52 @@ export default function SouvenirHome() {
             fontStyle: 'italic',
             color: '#2B2B2B',
             opacity: 0.7,
-            marginBottom: 80,
+            marginBottom: 48,
             lineHeight: 1.8,
           }}
         >
           Curated moments. Create your own Paris.
         </p>
+
+        {/* Primary Entry Button */}
+        <Link
+          to="/souvenir"
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: '#2B2B2B',
+            textDecoration: 'none',
+            border: '0.5px solid rgba(43, 43, 43, 0.2)',
+            padding: '14px 32px',
+            display: 'inline-block',
+            transition: 'all 300ms ease',
+            opacity: 0.8,
+            background: 'transparent',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '1';
+            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '0.8';
+            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
+          }}
+        >
+          Choose a profile
+        </Link>
       </section>
 
-      <MapSection
-        places={[]}
-        selectedPlace={null}
-        onSelectPlace={() => {}}
-        detailPanelMode="none"
-      />
-
-      <section
-        style={{
-          maxWidth: 560,
-          margin: '0 auto 120px',
-          padding: '0 40px',
-          textAlign: 'center',
-        }}
-      >
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
-          <Link
-            to="/souvenir"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: '#0E3F2F',
-              textDecoration: 'none',
-              borderBottom: '0.5px solid rgba(14, 63, 47, 0.25)',
-              paddingBottom: 4,
-              opacity: 0.8,
-              transition: 'opacity 300ms ease',
-            }}
-          >
-            Find a Petit Souvenir
-          </Link>
-          <Link
-            to="/create"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: '#0E3F2F',
-              textDecoration: 'none',
-              borderBottom: '0.5px solid rgba(14, 63, 47, 0.25)',
-              paddingBottom: 4,
-              opacity: 0.8,
-              transition: 'opacity 300ms ease',
-            }}
-          >
-            Create Your Paris
-          </Link>
-          <Link
-            to="/gift"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: '#0E3F2F',
-              textDecoration: 'none',
-              borderBottom: '0.5px solid rgba(14, 63, 47, 0.25)',
-              paddingBottom: 4,
-              opacity: 0.8,
-              transition: 'opacity 300ms ease',
-            }}
-          >
-            Gift
-          </Link>
-          <Link
-            to="/about"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              textDecoration: 'none',
-              opacity: 0.5,
-              transition: 'opacity 300ms ease',
-            }}
-          >
-            About
-          </Link>
-        </nav>
+      {/* Map (centered, breathing space) */}
+      <section style={{ padding: '60px 0' }}>
+        <MapSection
+          places={[]}
+          selectedPlace={null}
+          onSelectPlace={() => {}}
+          detailPanelMode="none"
+        />
       </section>
     </>
   );

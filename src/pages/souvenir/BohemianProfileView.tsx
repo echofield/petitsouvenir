@@ -12,6 +12,7 @@ import { BohemianPlaceDetailSheet } from '../../components/souvenir/BohemianPlac
 import { CategorySwitcher } from '../../components/souvenir/CategorySwitcher';
 import { CompanionCard } from '../../components/souvenir/CompanionCard';
 import { QuestsSection } from '../../components/souvenir/QuestsSection';
+import { QuestPreview } from '../../components/souvenir/QuestPreview';
 import { getBohemianProfile, BohemianPlace } from '../../data/bohemian-types';
 import { addPlace } from '../../utils/souvenir-storage';
 import { isProfileUnlocked, STRIPE_PAYMENT_LINK, unlockProfile } from '../../utils/souvenir-lock';
@@ -132,7 +133,7 @@ export default function BohemianProfileView() {
             fontSize: 36,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: '#0E3F2F',
+            color: '#2B2B2B',
             marginBottom: 12,
             lineHeight: 1.3,
           }}
@@ -175,24 +176,60 @@ export default function BohemianProfileView() {
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 10,
                 fontWeight: 500,
-                letterSpacing: '0.12em',
+                letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 padding: '14px 28px',
-                background: '#0E3F2F',
-                color: '#FAF9F6',
-                border: 'none',
+                background: 'rgba(43, 43, 43, 0.1)',
+                color: '#2B2B2B',
+                border: '0.5px solid rgba(43, 43, 43, 0.2)',
                 textDecoration: 'none',
                 display: 'inline-block',
-                transition: 'background 400ms ease',
+                transition: 'all 300ms ease',
+                opacity: 0.8,
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = '#0E3F2F'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)'; }}
             >
               Unlock this profile
             </a>
           </div>
         )}
       </section>
+
+      {/* Quest Preview Section (early visibility) */}
+      {unlocked && profileData.quests.length > 0 && selectedCategory !== 'companions' && (
+        <section
+          style={{
+            maxWidth: 900,
+            margin: '0 auto 60px',
+            padding: '0 40px',
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: 'Cormorant Garamond, Georgia, serif',
+              fontSize: 24,
+              fontWeight: 500,
+              letterSpacing: '0.02em',
+              color: '#2B2B2B',
+              marginBottom: 24,
+              lineHeight: 1.3,
+            }}
+          >
+            All-Day Quests
+          </h2>
+          <div>
+            {profileData.quests.slice(0, 3).map((quest) => (
+              <QuestPreview
+                key={quest.id}
+                quest={quest}
+                archetypeId={profileId}
+                onSaveChange={() => setQuestSavedEvent((prev) => prev + 1)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Map and List Section */}
       {selectedCategory !== 'companions' && (
@@ -276,11 +313,12 @@ export default function BohemianProfileView() {
                           fontFamily: 'Cormorant Garamond, Georgia, serif',
                           fontSize: 15,
                           fontWeight: 300,
-                          color: selectedPlace?.id === p.id ? '#0E3F2F' : '#2B2B2B',
+                          color: selectedPlace?.id === p.id ? '#2B2B2B' : '#2B2B2B',
                           opacity: selectedPlace?.id === p.id ? 1 : hasCoords ? 0.7 : 0.5,
                           padding: '6px 0',
                           textAlign: 'left',
                           textDecoration: selectedPlace?.id === p.id ? 'underline' : 'none',
+                          textDecorationThickness: '0.5px',
                           transition: 'opacity 300ms ease',
                           width: '100%',
                           display: 'flex',
@@ -293,8 +331,8 @@ export default function BohemianProfileView() {
                           <span
                             style={{
                               fontSize: 12,
-                              color: '#0E3F2F',
-                              opacity: 0.5,
+                              color: '#2B2B2B',
+                              opacity: 0.4,
                             }}
                           >
                             ✓
@@ -349,7 +387,7 @@ export default function BohemianProfileView() {
               fontSize: 32,
               fontWeight: 500,
               letterSpacing: '0.02em',
-              color: '#0E3F2F',
+              color: '#2B2B2B',
               marginBottom: 40,
               lineHeight: 1.3,
             }}

@@ -48,7 +48,7 @@ export function QuestCard({ quest, archetypeId, onSaveChange }: QuestCardProps) 
     <div
       style={{
         padding: '32px 0',
-        borderBottom: '0.5px solid rgba(14, 63, 47, 0.2)',
+        borderBottom: '0.5px solid rgba(43, 43, 43, 0.1)',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
@@ -117,8 +117,8 @@ export function QuestCard({ quest, archetypeId, onSaveChange }: QuestCardProps) 
               style={{
                 position: 'absolute',
                 left: 0,
-                color: '#0E3F2F',
-                opacity: 0.4,
+                color: '#2B2B2B',
+                opacity: 0.3,
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 12,
               }}
@@ -152,18 +152,19 @@ export function QuestCard({ quest, archetypeId, onSaveChange }: QuestCardProps) 
             textTransform: 'uppercase',
             padding: '12px 24px',
             background: 'transparent',
-            color: '#0E3F2F',
-            border: '0.5px solid rgba(14, 63, 47, 0.3)',
+            color: '#2B2B2B',
+            border: '0.5px solid rgba(43, 43, 43, 0.2)',
             textDecoration: 'none',
-            transition: 'all 400ms ease',
+            transition: 'all 300ms ease',
+            opacity: 0.8,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.8';
-            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+            e.currentTarget.style.opacity = '1';
+            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '1';
-            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+            e.currentTarget.style.opacity = '0.8';
+            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
           }}
         >
           Directions
@@ -175,29 +176,30 @@ export function QuestCard({ quest, archetypeId, onSaveChange }: QuestCardProps) 
             fontFamily: 'Inter, sans-serif',
             fontSize: 10,
             fontWeight: 500,
-            letterSpacing: '0.12em',
+            letterSpacing: '0.1em',
             textTransform: 'uppercase',
             padding: '12px 24px',
-            background: saved ? '#0E3F2F' : 'transparent',
-            color: saved ? '#FAF9F6' : '#0E3F2F',
-            border: saved ? 'none' : '0.5px solid rgba(14, 63, 47, 0.3)',
+            background: saved ? 'rgba(43, 43, 43, 0.1)' : 'transparent',
+            color: '#2B2B2B',
+            border: saved ? 'none' : '0.5px solid rgba(43, 43, 43, 0.2)',
             cursor: 'pointer',
-            transition: 'all 400ms ease',
+            transition: 'all 300ms ease',
+            opacity: saved ? 0.9 : 0.8,
           }}
           onMouseEnter={(e) => {
             if (!saved) {
-              e.currentTarget.style.opacity = '0.8';
-              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
             } else {
-              e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)';
+              e.currentTarget.style.background = 'rgba(43, 43, 43, 0.15)';
             }
           }}
           onMouseLeave={(e) => {
             if (!saved) {
-              e.currentTarget.style.opacity = '1';
-              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+              e.currentTarget.style.opacity = '0.8';
+              e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
             } else {
-              e.currentTarget.style.background = '#0E3F2F';
+              e.currentTarget.style.background = 'rgba(43, 43, 43, 0.1)';
             }
           }}
         >

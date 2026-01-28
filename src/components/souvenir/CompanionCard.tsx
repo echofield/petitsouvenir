@@ -14,7 +14,7 @@ export function CompanionCard({ companion }: CompanionCardProps) {
     <div
       style={{
         padding: '24px 0',
-        borderBottom: '0.5px solid rgba(14, 63, 47, 0.1)',
+        borderBottom: '0.5px solid rgba(43, 43, 43, 0.08)',
       }}
     >
       <h3
@@ -22,7 +22,7 @@ export function CompanionCard({ companion }: CompanionCardProps) {
           fontFamily: 'Cormorant Garamond, Georgia, serif',
           fontSize: 20,
           fontWeight: 500,
-          color: '#0E3F2F',
+          color: '#2B2B2B',
           marginBottom: 4,
           lineHeight: 1.3,
         }}
@@ -49,7 +49,8 @@ export function CompanionCard({ companion }: CompanionCardProps) {
           fontWeight: 500,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: '#0E3F2F',
+          color: '#2B2B2B',
+          opacity: 0.6,
           marginBottom: 8,
         }}
       >
@@ -83,34 +84,6 @@ export function CompanionCard({ companion }: CompanionCardProps) {
         {companion.microQuest}
       </p>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-        <a
-          href={companion.actions.buy}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 10,
-            fontWeight: 500,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            padding: '10px 20px',
-            background: 'transparent',
-            color: '#0E3F2F',
-            border: '0.5px solid rgba(14, 63, 47, 0.3)',
-            textDecoration: 'none',
-            transition: 'all 400ms ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.8';
-            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '1';
-            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
-          }}
-        >
-          Buy
-        </a>
         {companion.actions.findInParis && (
           <a
             href={companion.actions.findInParis}
@@ -120,27 +93,57 @@ export function CompanionCard({ companion }: CompanionCardProps) {
               fontFamily: 'Inter, sans-serif',
               fontSize: 10,
               fontWeight: 500,
-              letterSpacing: '0.12em',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
               padding: '10px 20px',
               background: 'transparent',
-              color: '#0E3F2F',
-              border: '0.5px solid rgba(14, 63, 47, 0.3)',
+              color: '#2B2B2B',
+              border: '0.5px solid rgba(43, 43, 43, 0.2)',
               textDecoration: 'none',
-              transition: 'all 400ms ease',
+              transition: 'all 300ms ease',
+              opacity: 0.8,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.8';
-              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
-              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+              e.currentTarget.style.opacity = '0.8';
+              e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
             }}
           >
             Find in Paris
           </a>
         )}
+        <a
+          href={companion.actions.buy}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 10,
+            fontWeight: 500,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            padding: '10px 20px',
+            background: 'transparent',
+            color: '#2B2B2B',
+            border: '0.5px solid rgba(43, 43, 43, 0.2)',
+            textDecoration: 'none',
+            transition: 'all 300ms ease',
+            opacity: 0.7,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '0.9';
+            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.3)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '0.7';
+            e.currentTarget.style.borderColor = 'rgba(43, 43, 43, 0.2)';
+          }}
+        >
+          Buy
+        </a>
       </div>
     </div>
   );
