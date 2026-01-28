@@ -43,7 +43,7 @@ export function MapSection({
     <section
       style={{
         maxWidth: showPanel ? 1260 : 1080,
-        margin: '-100px auto 100px',
+        margin: '0 auto 100px',
         padding: '0 40px',
         display: 'flex',
         flexDirection: listAside ? 'row' : undefined,

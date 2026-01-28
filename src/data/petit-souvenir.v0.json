@@ -1,0 +1,493 @@
+{
+  "profiles": [
+    {
+      "id": "bohemian",
+      "name": "Le Flâneur Intime",
+      "promise": "Trouver une solitude habitée — Paris en silence, en détails, en seuils.",
+      "rules": [
+        "Vitesse feuille: tu ne cours jamais. Tu dérives.",
+        "5 minutes avant photo: l'œil d'abord, le capteur ensuite.",
+        "Un seul détail par lieu: tu choisis, tu ignores le reste."
+      ],
+      "anti_rules": [
+        "Pas de file: si la queue déborde sur rue, tu abort.",
+        "Pas de monuments de face: tu ne \"fais\" pas Paris, tu le frôles.",
+        "Pas de grands axes comme expérience: boulevards = transit, ruelles = monde."
+      ],
+      "signature_cards": [
+        {
+          "type": "intent",
+          "title": "Chercher le silence",
+          "directive": "Entre comme si tu revenais. Ralentis jusqu'à devenir invisible.",
+          "rationale": "Le luxe ici n'est pas l'accès, mais la qualité d'attention."
+        },
+        {
+          "type": "micro_quest",
+          "title": "Le détail élu",
+          "directive": "Dans chaque lieu, choisis un seul détail. Regarde-le 60 secondes sans bouger.",
+          "rationale": "Le \"single item\" coupe le tourisme à la chaîne et ouvre la mémoire."
+        },
+        {
+          "type": "proof",
+          "title": "Preuve de présence",
+          "directive": "Photographie seulement une trace: ombre, texture, reflets — jamais la façade entière.",
+          "rationale": "Une preuve non-listicle: tu captes l'instant, pas la carte postale."
+        },
+        {
+          "type": "token",
+          "title": "Le fragment",
+          "directive": "Note 1 phrase: ce que le lieu t'a fait ralentir.",
+          "rationale": "Un souvenir portable, non-physique, fidèle au ton 'quiet luxury'."
+        }
+      ],
+      "places": [
+        {
+          "id": "musee-zadkine",
+          "name": "Musée Zadkine (atelier + jardin)",
+          "address": "100 bis Rue d'Assas, 75006 Paris",
+          "area": "6e / Notre-Dame-des-Champs",
+          "why_it_fits": "Un atelier domestique où la sculpture respire avec les arbres — anti-monument par nature.",
+          "micro_quest": "Va au jardin. Trouve une œuvre en bronze et attend qu'un bruit (gravier, feuille, oiseau) prenne le dessus sur la ville.",
+          "proof_of_wonder": "Une photo d'ombre portée sur le gravier (ombre > statue).",
+          "best_time": "Semaine, ouverture (10:00) ou dernière heure avant fermeture; éviter week-ends ensoleillés.",
+          "avoid": "Évite les heures de sortie Luxembourg; petit lieu = saturation rapide.",
+          "official_link": "https://www.parismusees.paris.fr/fr/musee-zadkine",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+Zadkine+100+bis+Rue+d%E2%80%99Assas+75006+Paris",
+          "x": 380,
+          "y": 340
+        },
+        {
+          "id": "maison-de-balzac",
+          "name": "Maison de Balzac",
+          "address": "47 Rue Raynouard, 75016 Paris",
+          "area": "16e / Passy",
+          "why_it_fits": "Refuge en contrebas — sensation de chute temporelle et de retraite productive.",
+          "micro_quest": "Descends au jardin. Repère un point où la ville réapparaît (vue/son). Reste 2 minutes immobile.",
+          "proof_of_wonder": "Une note (ou photo) du contraste: jardin silencieux + surgissement urbain (pas de panorama).",
+          "best_time": "Milieu de semaine, 11:00–15:00; pluie fine = parfait (moins de monde).",
+          "avoid": "Évite l'après-midi du dimanche; évite d'entrer si un groupe scolaire occupe le lieu.",
+          "official_link": "https://www.parismusees.paris.fr/fr/musee-maison-de-balzac",
+          "map_link": "https://www.google.com/maps?q=Maison+de+Balzac+47+Rue+Raynouard+75016+Paris",
+          "x": 320,
+          "y": 280
+        },
+        {
+          "id": "musee-vie-romantique",
+          "name": "Musée de la Vie romantique",
+          "address": "16 Rue Chaptal, 75009 Paris",
+          "area": "9e / Nouvelle Athènes",
+          "why_it_fits": "Maison-salon + jardin: un sas de calme derrière une allée pavée.",
+          "micro_quest": "Traverse l'allée pavée sans parler. Dans le jardin, choisis une seule texture (pierre, feuille, ferronnerie) et décris-la en 7 mots.",
+          "proof_of_wonder": "Photo d'un détail de jardin (treillis/ombre) — jamais la façade.",
+          "best_time": "Matin en semaine; saison froide = vide, donc idéal.",
+          "avoid": "Évite les créneaux goûter (plus de monde).",
+          "official_link": "https://www.parismusees.paris.fr/fr/musee-de-la-vie-romantique",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+de+la+Vie+romantique+16+Rue+Chaptal+75009+Paris",
+          "x": 400,
+          "y": 250
+        },
+        {
+          "id": "musee-bourdelle",
+          "name": "Musée Bourdelle (ateliers + jardin)",
+          "address": "18 Rue Antoine Bourdelle, 75015 Paris",
+          "area": "15e / Montparnasse",
+          "why_it_fits": "Grand atelier sans foule: l'échelle du geste, pas l'échelle du monument.",
+          "micro_quest": "Choisis une œuvre monumentale… et ignore-la. Cherche un outil, un socle, une trace d'atelier (vis, crochet, plâtre).",
+          "proof_of_wonder": "Photo d'un détail d'atelier (outil/trace), cadrage serré.",
+          "best_time": "Semaine, 14:00–17:00; jours gris = atmosphère atelier parfaite.",
+          "avoid": "Évite les jours d'expo/vernissage si annoncé (densité).",
+          "official_link": "https://www.parismusees.paris.fr/fr/musee-bourdelle",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+Bourdelle+18+Rue+Antoine+Bourdelle+75015+Paris",
+          "x": 370,
+          "y": 360
+        },
+        {
+          "id": "jardin-catherine-laboure",
+          "name": "Jardin Catherine-Labouré",
+          "address": "29 Rue de Babylone, 75007 Paris",
+          "area": "7e / Sèvres-Babylone",
+          "why_it_fits": "Jardin caché, presque monacal: rareté de silence dans le 7e.",
+          "micro_quest": "Entre, marche jusqu'au point le plus éloigné de l'entrée. Compte 20 respirations sans regarder le téléphone.",
+          "proof_of_wonder": "Note audio de 10 secondes: le 'son' du jardin (pas de parole).",
+          "best_time": "Jour de semaine, début d'après-midi; éviter heures de sortie bureaux.",
+          "avoid": "Évite l'heure du déjeuner en semaine (flux).",
+          "official_link": "https://www.paris.fr/pages/un-jardin-secret-au-coeur-du-7e-arrondissement-21447",
+          "map_link": "https://www.google.com/maps?q=Jardin+Catherine-Labour%C3%A9+29+Rue+de+Babylone+75007+Paris",
+          "x": 390,
+          "y": 350
+        },
+        {
+          "id": "jardin-des-rosiers-migneret",
+          "name": "Jardin des Rosiers – Joseph-Migneret",
+          "address": "10 Rue des Rosiers, 75004 Paris",
+          "area": "4e / Marais",
+          "why_it_fits": "Le Marais sans la foule: un jardin-contrechamp derrière la rue la plus saturée.",
+          "micro_quest": "Entre par le 10 rue des Rosiers. Va jusqu'à la zone la plus calme et cherche une trace de mur médiéval (pierre/élévation).",
+          "proof_of_wonder": "Photo de texture de pierre ancienne + un son (10s) du jardin (silence).",
+          "best_time": "Matin semaine; en hiver, avant fermeture (horaires saisonniers).",
+          "avoid": "Évite 12:00–15:00 le week-end (Rue des Rosiers = flux).",
+          "official_link": "https://www.paris.fr/equipements/jardin-des-rosiers-joseph-migneret-1785",
+          "map_link": "https://www.google.com/maps?q=Jardin+des+Rosiers+Joseph-Migneret+10+Rue+des+Rosiers+75004+Paris",
+          "x": 440,
+          "y": 295
+        },
+        {
+          "id": "musee-montmartre-jardins-renoir",
+          "name": "Musée de Montmartre & Jardins Renoir",
+          "address": "12 Rue Cortot, 75018 Paris",
+          "area": "18e / Montmartre",
+          "why_it_fits": "Montmartre, mais en retrait: jardins comme refuge derrière l'axe touristique.",
+          "micro_quest": "Dans les jardins, trouve un angle où la ville disparaît. Écris 1 phrase au présent, sans adjectif.",
+          "proof_of_wonder": "Photo d'un détail végétal + mur (patine) — pas de vue carte postale.",
+          "best_time": "Ouverture en semaine; éviter week-ends après 15:00.",
+          "avoid": "Évite la Place du Tertre (hors-jeu) — tu passes par Cortot et tu restes côté jardins.",
+          "official_link": "https://museedemontmartre.fr/",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+de+Montmartre+12+Rue+Cortot+75018+Paris",
+          "x": 355,
+          "y": 218
+        },
+        {
+          "id": "musee-gustave-moreau",
+          "name": "Musée Gustave Moreau",
+          "address": "14 Rue de la Rochefoucauld, 75009 Paris",
+          "area": "9e / Saint-Georges",
+          "why_it_fits": "Maison-atelier verticale: intime, étrange, loin du flux muséal.",
+          "micro_quest": "Monte l'escalier en colimaçon sans parler. À l'étage, choisis un seul cadre et repère un motif répété 3 fois.",
+          "proof_of_wonder": "Note écrite: les 3 répétitions (motif/couleur/forme) — pas de photo si salle dense.",
+          "best_time": "Semaine, matin; pluie = quasi vide.",
+          "avoid": "Évite les week-ends; vérifie fermetures exceptionnelles.",
+          "official_link": "https://musee-moreau.fr/",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+Gustave+Moreau+14+Rue+de+la+Rochefoucauld+75009+Paris",
+          "x": 405,
+          "y": 250
+        }
+      ]
+    },
+    {
+      "id": "family",
+      "name": "L'Explorateur Ludique",
+      "promise": "Transformer Paris en plateau d'aventure — design-conscious, sans Disneyland.",
+      "rules": [
+        "Changement d'échelle: à chaque lieu, l'adulte se met à hauteur d'enfant 1 fois.",
+        "Collecte obligatoire: chaque spot = 1 chose trouvée (forme, trace, texture).",
+        "Tactile si safe: toucher (rails, bois, pierre), pas seulement regarder."
+      ],
+      "anti_rules": [
+        "Pas de 'kids-menu' framing: on mange local, on partage.",
+        "Pas d'écrans-pacificateurs: téléphone uniquement pour mission (carte, preuve).",
+        "Pas de 'musées génériques': on privilégie cabinets, mécaniques, surprises."
+      ],
+      "signature_cards": [
+        {
+          "type": "intent",
+          "title": "Chasser le détail",
+          "directive": "Aujourd'hui, vous êtes une équipe. Un chef de mission (l'enfant) décide du rythme.",
+          "rationale": "Donner l'agence à l'enfant rend l'exploration partageable et durable."
+        },
+        {
+          "type": "micro_quest",
+          "title": "La collecte",
+          "directive": "Par spot: trouvez 1 'vivant', 1 'fabriqué', 1 'ancien'.",
+          "rationale": "Structure simple, répétable, qui entraîne le regard sans infantiliser."
+        },
+        {
+          "type": "proof",
+          "title": "Preuve de mission",
+          "directive": "Une photo des mains en interaction (pas de selfies): toucher, ouvrir, mesurer.",
+          "rationale": "La preuve raconte l'action — pas la consommation d'un lieu."
+        },
+        {
+          "type": "token",
+          "title": "Badge d'explorateur",
+          "directive": "À la fin, nommez la journée en 3 mots et sauvegardez-les.",
+          "rationale": "Un souvenir linguistique + une mémoire structurée, sans objet inutile."
+        }
+      ],
+      "places": [
+        {
+          "id": "dodo-manege",
+          "name": "Le Dodo Manège (Jardin des Plantes)",
+          "address": "Jardin des Plantes, 75005 Paris (près Gare d'Austerlitz / Grande Galerie)",
+          "area": "5e / Jardin des Plantes",
+          "why_it_fits": "Un carrousel rare (animaux disparus) qui ouvre une conversation sans moraliser.",
+          "micro_quest": "Trouve un animal 'étrange' (pas dodo). Monte dessus. Ensuite, cherche son nom sur les panneaux autour.",
+          "proof_of_wonder": "Photo du ticket + de l'animal choisi (cadrage serré), et 1 phrase: \"il n'existe plus / il est menacé\".",
+          "best_time": "Matin week-end (avant 11:30) ou mercredi après-midi hors vacances.",
+          "avoid": "Évite vacances scolaires après 15:00 (files).",
+          "official_link": "https://www.jardindesplantesdeparis.fr/fr/activites-animations/le-dodo-manege",
+          "map_link": "https://www.google.com/maps?q=Le+Dodo+Man%C3%A8ge+Jardin+des+Plantes+Paris",
+          "x": 420,
+          "y": 320
+        },
+        {
+          "id": "musee-chasse-nature",
+          "name": "Musée de la Chasse et de la Nature",
+          "address": "62 Rue des Archives, 75003 Paris",
+          "area": "3e / Marais",
+          "why_it_fits": "Cabinet de curiosités vivant: secret, ludique, esthétique — pas un 'musée pour enfants'.",
+          "micro_quest": "Trouvez une salle qui 'parle' (ou surprend). L'enfant décrit ce qu'il a vu en 10 secondes chrono.",
+          "proof_of_wonder": "Photo d'un détail non-animal (boiserie, tiroir, motif) + l'objet trouvé dans un tiroir (si autorisé).",
+          "best_time": "Semaine, 11:00–13:00; le week-end dès ouverture.",
+          "avoid": "Évite les groupes (densité sonore).",
+          "official_link": "https://www.chassenature.org/",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+de+la+Chasse+et+de+la+Nature+62+Rue+des+Archives+75003+Paris",
+          "x": 440,
+          "y": 290
+        },
+        {
+          "id": "petite-ceinture-15",
+          "name": "La Petite Ceinture (section 15e / PC15)",
+          "address": "Accès recommandé: 99 Rue Olivier de Serres, 75015 Paris",
+          "area": "15e / Vaugirard",
+          "why_it_fits": "Urbex sécurisé: rails + nature, sans voitures, sans parc 'designé'.",
+          "micro_quest": "Marchez 12 minutes. Trouvez 3 'vivants' (plantes/insectes) + 1 trace industrielle (panneau, rail, boulon).",
+          "proof_of_wonder": "Photo des pieds sur ballast/rail (sécurité d'abord) + 1 gros plan d'une plante entre les traverses.",
+          "best_time": "Fin d'après-midi (lumière oblique), hors pluie forte; ferme au coucher du soleil.",
+          "avoid": "Évite poussettes; pas de toilettes sur le tracé.",
+          "official_link": "https://www.paris.fr/pages/la-petite-ceinture-une-boucle-verte-autour-de-paris-10052",
+          "map_link": "https://www.google.com/maps?q=99+Rue+Olivier+de+Serres+75015+Paris+Petite+Ceinture",
+          "x": 360,
+          "y": 365
+        },
+        {
+          "id": "ferme-de-paris",
+          "name": "La Ferme de Paris (Bois de Vincennes)",
+          "address": "1 Route du Pesage, 75012 Paris",
+          "area": "12e / Bois de Vincennes",
+          "why_it_fits": "Un vrai rythme agricole — gratuit, simple, sensoriel: paille, terre, cycle.",
+          "micro_quest": "Choisissez un animal. Observez 2 minutes sans parler. Ensuite: 1 question 'comment ça marche ?' (nourriture, abri, soin).",
+          "proof_of_wonder": "Photo d'une texture (paille/bois/terre) + une liste de 3 odeurs perçues.",
+          "best_time": "Après-midi week-end (souvent ouverture concentrée), ou mercredi si ouvert.",
+          "avoid": "Évite de venir sans vérifier horaires saisonniers (peu constants).",
+          "official_link": "https://www.paris.fr/lieux/ferme-de-paris-1887",
+          "map_link": "https://www.google.com/maps?q=Ferme+de+Paris+1+Route+du+Pesage+75012+Paris",
+          "x": 480,
+          "y": 320
+        },
+        {
+          "id": "jardin-agronomie-tropicale",
+          "name": "Jardin d'Agronomie Tropicale",
+          "address": "45bis Avenue de la Belle Gabrielle, 75012 Paris",
+          "area": "12e / Bois de Vincennes",
+          "why_it_fits": "Un décor étrange (pavillons/ruines) parfait pour 'aventure design' sans parc d'attractions.",
+          "micro_quest": "Trouve 2 'ruines' et invente leur fonction en 1 phrase chacune, puis lis (ou vérifie) un panneau réel si présent.",
+          "proof_of_wonder": "Photo d'un pavillon/fragment + un croquis rapide (30 secondes) du même fragment.",
+          "best_time": "Matin week-end (calme) ou semaine; lumière douce (hiver/automne).",
+          "avoid": "Évite fin de journée sombre si enfants jeunes (ambiance très 'forêt/ruines').",
+          "official_link": "https://www.paris.fr/lieux/jardin-d-agronomie-tropicale-1840",
+          "map_link": "https://www.google.com/maps?q=Jardin+d%E2%80%99Agronomie+Tropicale+45bis+Avenue+de+la+Belle+Gabrielle+75012+Paris",
+          "x": 475,
+          "y": 310
+        },
+        {
+          "id": "galerie-paleontologie-jdp",
+          "name": "Galerie de Paléontologie et d'Anatomie comparée",
+          "address": "2 Rue Buffon, 75005 Paris (Jardin des Plantes)",
+          "area": "5e / Jardin des Plantes",
+          "why_it_fits": "Spectaculaire mais souvent plus respirable qu'un 'grand musée': os, formes, imagination.",
+          "micro_quest": "Trouve un squelette 'impossible'. L'enfant explique comment il se déplaçait. L'adulte trouve ensuite le nom exact sur cartel.",
+          "proof_of_wonder": "Photo d'un détail (vertèbres, mâchoire, articulation) + le nom recopié à la main.",
+          "best_time": "Semaine, 11:00–14:00; éviter vacances scolaires.",
+          "avoid": "Évite la fin d'après-midi quand les groupes se concentrent.",
+          "official_link": "https://www.mnhn.fr/fr/galerie-de-paleontologie-et-d-anatomie-comparee",
+          "map_link": "https://www.google.com/maps?q=Galerie+de+Pal%C3%A9ontologie+2+Rue+Buffon+75005+Paris",
+          "x": 420,
+          "y": 320
+        },
+        {
+          "id": "musee-des-arts-et-metiers",
+          "name": "Musée des Arts et Métiers",
+          "address": "60 Rue Réaumur, 75003 Paris",
+          "area": "3e / Arts-et-Métiers",
+          "why_it_fits": "Ingénierie comme merveille: machines, métal, précision — 'steampunk' sans décor fake.",
+          "micro_quest": "Choisis une machine. Trouve 3 formes géométriques dedans (cercle, vis, axe).",
+          "proof_of_wonder": "Photo (ou note) des 3 formes + 1 mot pour le 'bruit imaginaire' de la machine.",
+          "best_time": "Semaine, début d'après-midi; évite mercredi fin d'après-midi.",
+          "avoid": "Évite de 'tout faire': objectif = 1 salle, 1 machine, 1 souvenir.",
+          "official_link": "https://www.arts-et-metiers.net/musee",
+          "map_link": "https://www.google.com/maps?q=Mus%C3%A9e+des+Arts+et+M%C3%A9tiers+60+Rue+R%C3%A9aumur+75003+Paris",
+          "x": 430,
+          "y": 280
+        },
+        {
+          "id": "passage-des-panoramas-jouffroy-loop",
+          "name": "Loop Passages couverts (Panoramas → Jouffroy)",
+          "address": "Entrée conseillée: 11 Boulevard Montmartre, 75002 Paris (Panoramas)",
+          "area": "2e / Grands Boulevards",
+          "why_it_fits": "Tunnel de temps couvert: vitrines, détails, abri pluie — parfait pour mission 'décode'.",
+          "micro_quest": "Faites une chasse à 5 détails: 1 enseigne ancienne, 1 motif au sol, 1 reflet sous verrière, 1 animal (dessin/objet), 1 date.",
+          "proof_of_wonder": "Photo du détail le plus 'minuscule' trouvé + la liste des 5 (écrite).",
+          "best_time": "Temps de pluie; ou matin week-end avant 11:30.",
+          "avoid": "Évite samedi après-midi (densité).",
+          "official_link": "https://www.parisinfo.com/decouvrir-paris/balades-a-paris/les-passages-couverts-a-paris",
+          "map_link": "https://www.google.com/maps?q=Passage+des+Panoramas+75002+Paris",
+          "x": 420,
+          "y": 265
+        }
+      ]
+    },
+    {
+      "id": "night",
+      "name": "Le Noctambule Esthète",
+      "promise": "Posséder le calme nocturne — jazz, pierres, bars de savoir-faire, pas de club.",
+      "rules": [
+        "Cap décibels: si tu dois crier, tu changes de lieu.",
+        "Blue hour start: tu commences au crépuscule, tu suis la lumière qui baisse.",
+        "Tenue = décor: effortless chic, tu ne casses pas l'atmosphère."
+      ],
+      "anti_rules": [
+        "Pas de néon: tu restes dans l'ambre (lampes, bougies, bois, cuir).",
+        "Pas de queue: pas de speakeasy-hype où tu attends dehors.",
+        "Pas de flash: photo discrète, jamais d'éclair."
+      ],
+      "signature_cards": [
+        {
+          "type": "intent",
+          "title": "Chasser l'ambre",
+          "directive": "Tu cherches la lumière chaude, pas l'adresse célèbre.",
+          "rationale": "Le nocturne ici est mise-en-scène: lumières, sons, matières."
+        },
+        {
+          "type": "micro_quest",
+          "title": "La place juste",
+          "directive": "Dans chaque bar: trouve le 'sweet spot' (son/lumière). Assieds-toi. 90 secondes de silence.",
+          "rationale": "Le lieu se révèle par le point d'écoute, pas par la carte."
+        },
+        {
+          "type": "proof",
+          "title": "Détail noir",
+          "directive": "Une preuve: reflet sur verre, cuir, dorure, pierre humide — jamais la salle entière.",
+          "rationale": "Preuve cinématographique, pas reportage."
+        },
+        {
+          "type": "token",
+          "title": "La note de nuit",
+          "directive": "Écris le nom d'un morceau, d'un cocktail, ou d'une rue — un seul.",
+          "rationale": "Un ancrage minimal qui réactive la nuit plus tard."
+        }
+      ],
+      "places": [
+        {
+          "id": "montezuma-cafe",
+          "name": "Montezuma Café (listening bar)",
+          "address": "15 Rue Notre-Dame des Victoires, 75002 Paris",
+          "area": "2e / Bourse",
+          "why_it_fits": "Hi-fi + vin naturel: une nuit d'écoute active, pas une nuit de bruit.",
+          "micro_quest": "Assieds-toi près du point d'écoute. Commande un verre. Ferme les yeux 30 secondes et isole la ligne de basse.",
+          "proof_of_wonder": "Note: 3 sons distincts entendus (cymbale, voix, basse) + photo d'un détail (ampli/bois/pierre).",
+          "best_time": "Début de soirée (19:00–21:00) pour éviter la densité; semaine idéale.",
+          "avoid": "Évite fin de soirée si tu veux conversation longue (peut monter).",
+          "official_link": "https://montezumacafe.com/",
+          "map_link": "https://www.google.com/maps?q=Montezuma+Caf%C3%A9+15+Rue+Notre-Dame+des+Victoires+75002+Paris",
+          "x": 410,
+          "y": 270
+        },
+        {
+          "id": "frequence-bar",
+          "name": "Fréquence",
+          "address": "20 Rue Keller, 75011 Paris",
+          "area": "11e / Bastille",
+          "why_it_fits": "Cocktails précis + vinyles: chaleur, rythme, sans clubbing.",
+          "micro_quest": "Au bar, observe 1 minute la chorégraphie: shaker + vinyle. Puis commande un highball (ou demande 'sec et net').",
+          "proof_of_wonder": "Photo d'un détail de la 'muraille' de vinyles (sans visages) + le nom du morceau joué (si tu l'obtiens).",
+          "best_time": "21:00–23:00 en semaine; arrive tôt le samedi.",
+          "avoid": "Évite après minuit si tu veux 'cap décibels' strict (peut se densifier).",
+          "official_link": "https://www.facebook.com/frequenceparis/",
+          "map_link": "https://www.google.com/maps?q=Fr%C3%A9quence+20+Rue+Keller+75011+Paris",
+          "x": 450,
+          "y": 255
+        },
+        {
+          "id": "combat-bar",
+          "name": "Combat",
+          "address": "63 Rue de Belleville, 75019 Paris",
+          "area": "19e / Belleville",
+          "why_it_fits": "Mixologie de destination hors centre: Paris nocturne de quartier, pas de vitrine touristique.",
+          "micro_quest": "Commande un cocktail 'amer' (ou demande leur signature). Bois lentement. Regarde la rue 60 secondes entre deux gorgées.",
+          "proof_of_wonder": "Note: 2 arômes (bitter + autre) + photo d'un détail minimal (verre, dessous de verre, lumière).",
+          "best_time": "Semaine 20:00–22:00 (calme, discussion).",
+          "avoid": "Évite les soirs très demandés si tu détestes attendre dehors (petit lieu).",
+          "official_link": "https://www.instagram.com/combatbar/",
+          "map_link": "https://www.google.com/maps?q=Combat+63+Rue+de+Belleville+75019+Paris",
+          "x": 460,
+          "y": 240
+        },
+        {
+          "id": "chez-denise-tour-de-montlhery",
+          "name": "Chez Denise (La Tour de Montlhéry)",
+          "address": "5 Rue des Prouvaires, 75001 Paris",
+          "area": "1er / Les Halles",
+          "why_it_fits": "Rituel de nuit: manger tard dans un vestige vivant, anti-hype par endurance.",
+          "micro_quest": "Arrive après 23:30. Commande un plat simple (onglet / viande). Laisse ton téléphone dans la poche 10 minutes.",
+          "proof_of_wonder": "Photo du ticket (ou note du plat + heure exacte) — preuve temporelle.",
+          "best_time": "Nuits de semaine (lundi-jeudi) vers 00:00–02:00.",
+          "avoid": "Évite si tu ne supportes pas l'énergie brasserie tardive (ça vit).",
+          "official_link": "https://www.timeout.com/paris/en/restaurants/chez-denise",
+          "map_link": "https://www.google.com/maps?q=Chez+Denise+La+Tour+de+Montlh%C3%A9ry+5+Rue+des+Prouvaires+75001+Paris",
+          "x": 415,
+          "y": 285
+        },
+        {
+          "id": "bar-228-le-meurice",
+          "name": "Bar 228 (Le Meurice)",
+          "address": "228 Rue de Rivoli, 75001 Paris",
+          "area": "1er / Rivoli",
+          "why_it_fits": "Quiet luxury pur: cuir, piano, protocole sans ostentation si tu sais entrer.",
+          "micro_quest": "Entre sans hésiter. Choisis une place 'lumière ambre'. Commande un classique (Martini / Old Fashioned).",
+          "proof_of_wonder": "Photo d'un détail matière (cuir/bois/lampe) + note: 1 phrase de la musique entendue.",
+          "best_time": "Début de soirée (18:30–20:30) ou fin (après 22:30) pour calme.",
+          "avoid": "Évite si tenue trop 'touriste' (on reste décor).",
+          "official_link": "https://www.leurice.com/en/restaurants-bars/bar-228/",
+          "map_link": "https://www.google.com/maps?q=Bar+228+Le+Meurice+228+Rue+de+Rivoli+75001+Paris",
+          "x": 400,
+          "y": 285
+        },
+        {
+          "id": "harrys-new-york-bar",
+          "name": "Harry's New York Bar",
+          "address": "5 Rue Daunou, 75002 Paris",
+          "area": "2e / Opéra",
+          "why_it_fits": "Institution sans posture: un bar où l'histoire remplace le spectacle.",
+          "micro_quest": "Commande un cocktail 'sec' (ou un classique). Demande au bar un détail d'histoire en une phrase.",
+          "proof_of_wonder": "Note: le détail d'histoire + photo d'un détail (bois, plaque, verre) sans foule.",
+          "best_time": "Semaine tôt (avant 20:00) pour place et conversation.",
+          "avoid": "Évite les pics week-end tard (peut devenir bruyant).",
+          "official_link": "https://www.harrysbar.fr/",
+          "map_link": "https://www.google.com/maps?q=Harry%E2%80%99s+New+York+Bar+5+Rue+Daunou+75002+Paris",
+          "x": 405,
+          "y": 275
+        },
+        {
+          "id": "saint-etienne-du-mont-steps",
+          "name": "Les marches de Saint-Étienne-du-Mont (rituel d'attente)",
+          "address": "Place Sainte-Geneviève, 75005 Paris",
+          "area": "5e / Latin Quarter",
+          "why_it_fits": "Une scène nocturne à jouer: pierre, lampadaire, attente — zéro club, 100% cinéma.",
+          "micro_quest": "Assieds-toi 5 minutes. Aucun écran. Observe 3 lumières (lampadaire, fenêtre, voiture) et leur rythme.",
+          "proof_of_wonder": "Photo d'une seule lumière reflétée sur la pierre (ou note des 3 rythmes).",
+          "best_time": "Blue hour → 23:00 en semaine; après la sortie des étudiants = meilleur.",
+          "avoid": "Évite les soirées trop animées du quartier (si ça devient bruyant, tu bouges).",
+          "official_link": "https://www.saintetiennedumont.fr/",
+          "map_link": "https://www.google.com/maps?q=%C3%89glise+Saint-%C3%89tienne-du-Mont+75005+Paris",
+          "x": 420,
+          "y": 320
+        },
+        {
+          "id": "passage-des-panoramas-caffe-stern",
+          "name": "Passage des Panoramas (détail: Caffè Stern / vitrine)",
+          "address": "Passage des Panoramas, 75002 Paris",
+          "area": "2e / Grands Boulevards",
+          "why_it_fits": "Gaz-lights fantômes et vitrines: un corridor nocturne qui fabrique l'ambiance sans effort.",
+          "micro_quest": "Traverse lentement. Cherche 1 détail surréaliste en vitrine (animal/gravure/objet). Reste 20 secondes sans entrer.",
+          "proof_of_wonder": "Photo de silhouette/reflet sous verrière (sans visages).",
+          "best_time": "Nuit pluvieuse ou froide (ambiance + moins de densité).",
+          "avoid": "Évite samedi soir si tu veux calme strict.",
+          "official_link": "https://www.parisinfo.com/paris-monument/71434/passage-des-panoramas",
+          "map_link": "https://www.google.com/maps?q=Passage+des+Panoramas+75002+Paris",
+          "x": 420,
+          "y": 265
+        }
+      ]
+    }
+  ]
+}
