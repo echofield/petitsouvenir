@@ -1,0 +1,334 @@
+{
+  "profile": {
+    "id": "bohemian",
+    "name": "Bohemian",
+    "essence": "Protects attention. Eats to continue walking.",
+    "rules": [
+      "No hype.",
+      "No performance.",
+      "Food sustains perception, not pleasure.",
+      "A place must allow a micro-quest."
+    ]
+  },
+  "categories": [
+    { "id": "culture", "label": "Culture", "mapped": true },
+    { "id": "tables", "label": "Tables", "mapped": true },
+    { "id": "cafes", "label": "Cafés", "mapped": true },
+    { "id": "bookshops", "label": "Bookshops", "mapped": true },
+    { "id": "cinema", "label": "Cinema", "mapped": true },
+    { "id": "body", "label": "Body", "mapped": true },
+    { "id": "care", "label": "Care", "mapped": true },
+    { "id": "companions", "label": "Companions", "mapped": false }
+  ],
+  "places": [
+    {
+      "id": "musee_zadkine",
+      "categoryId": "culture",
+      "title": "Musée Zadkine",
+      "address": "100 bis rue d'Assas, 75006 Paris",
+      "x": 380,
+      "y": 340,
+      "lat": 48.8422,
+      "lng": 2.3296,
+      "why": "An atelier where silence has weight.",
+      "tags": {
+        "price": "€",
+        "time": "1h",
+        "solo": "very",
+        "bestMoment": "morning"
+      },
+      "microQuest": "Sit in the garden and choose one sculpture only.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Musée+Zadkine+Paris",
+        "schedule": "https://www.parismusees.paris.fr/fr/musee-zadkine"
+      }
+    },
+    {
+      "id": "musee_bourdelle",
+      "categoryId": "culture",
+      "title": "Musée Bourdelle",
+      "address": "18 rue Antoine Bourdelle, 75015 Paris",
+      "x": 370,
+      "y": 360,
+      "lat": 48.8433,
+      "lng": 2.3219,
+      "why": "Large rooms that slow the body.",
+      "tags": {
+        "price": "€",
+        "time": "2–3h",
+        "solo": "very",
+        "bestMoment": "late"
+      },
+      "microQuest": "Walk the atelier without reading any plaque.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Musée+Bourdelle+Paris",
+        "schedule": "https://www.parismusees.paris.fr/fr/musee-bourdelle"
+      }
+    },
+    {
+      "id": "jardin_catherine_laboure",
+      "categoryId": "culture",
+      "title": "Jardin Catherine-Labouré",
+      "address": "29 rue de Babylone, 75007 Paris",
+      "x": 390,
+      "y": 350,
+      "lat": 48.8506,
+      "lng": 2.3212,
+      "why": "A garden kept behind intention.",
+      "tags": {
+        "price": "€",
+        "time": "30 min",
+        "solo": "very",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Stay until a bell or sound interrupts you.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Jardin+Catherine+Labouré+Paris"
+      }
+    },
+    {
+      "id": "table_jaja",
+      "categoryId": "tables",
+      "title": "JAJA",
+      "address": "3 rue de la Fontaine au Roi, 75011 Paris",
+      "x": 450,
+      "y": 255,
+      "lat": 48.8693,
+      "lng": 2.3695,
+      "why": "Vegetal food without insistence.",
+      "tags": {
+        "price": "€€",
+        "time": "1h",
+        "solo": "very",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Eat slowly without finishing everything.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=JAJA+Paris",
+        "booking": "https://www.jajaparis.fr"
+      }
+    },
+    {
+      "id": "table_mian_guan",
+      "categoryId": "tables",
+      "title": "Mian Guan",
+      "address": "34 rue de Belleville, 75020 Paris",
+      "x": 460,
+      "y": 240,
+      "lat": 48.8724,
+      "lng": 2.3811,
+      "why": "Warm food that disappears quickly.",
+      "tags": {
+        "price": "€",
+        "time": "1h",
+        "solo": "very",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Leave immediately after the bowl.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Mian+Guan+34+rue+de+Belleville+Paris"
+      }
+    },
+    {
+      "id": "table_lao_siam",
+      "categoryId": "tables",
+      "title": "Lao Siam",
+      "address": "49 rue de Belleville, 75019 Paris",
+      "x": 460,
+      "y": 240,
+      "lat": 48.8736,
+      "lng": 2.3827,
+      "why": "Family cooking without decoration.",
+      "tags": {
+        "price": "€",
+        "time": "1h",
+        "solo": "very",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Order what the table next to you ordered.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Lao+Siam+Paris"
+      }
+    },
+    {
+      "id": "cafe_dreamin_man",
+      "categoryId": "cafes",
+      "title": "Dreamin' Man",
+      "address": "140 rue Amelot, 75011 Paris",
+      "x": 450,
+      "y": 255,
+      "lat": 48.8655,
+      "lng": 2.3664,
+      "why": "A pause that stays small.",
+      "tags": {
+        "price": "€",
+        "time": "30 min",
+        "solo": "very",
+        "bestMoment": "morning"
+      },
+      "microQuest": "Drink standing if there is space.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Dreamin+Man+Paris"
+      }
+    },
+    {
+      "id": "cafe_tea_caddy",
+      "categoryId": "cafes",
+      "title": "The Tea Caddy",
+      "address": "14 rue Saint-Julien-le-Pauvre, 75005 Paris",
+      "x": 420,
+      "y": 320,
+      "lat": 48.8511,
+      "lng": 2.3479,
+      "why": "Time slows without explanation.",
+      "tags": {
+        "price": "€€",
+        "time": "1h",
+        "solo": "very",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Read one page before ordering.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=The+Tea+Caddy+Paris"
+      }
+    },
+    {
+      "id": "bookshop_abbey",
+      "categoryId": "bookshops",
+      "title": "Abbey Bookshop",
+      "address": "29 rue de la Parcheminerie, 75005 Paris",
+      "x": 420,
+      "y": 320,
+      "lat": 48.8521,
+      "lng": 2.3465,
+      "why": "Books without urgency.",
+      "tags": {
+        "price": "€",
+        "time": "2–3h",
+        "solo": "very",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Choose a book you will not buy.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Abbey+Bookshop+Paris",
+        "booking": "https://www.abbeybookshop.org"
+      }
+    },
+    {
+      "id": "cinema_champo",
+      "categoryId": "cinema",
+      "title": "Le Champo",
+      "address": "51 rue des Écoles, 75005 Paris",
+      "x": 420,
+      "y": 320,
+      "lat": 48.8496,
+      "lng": 2.3448,
+      "why": "A room to close the day.",
+      "tags": {
+        "price": "€€",
+        "time": "2–3h",
+        "solo": "very",
+        "bestMoment": "evening"
+      },
+      "microQuest": "Stand outside for 30 seconds after the credits.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Le+Champo+Paris",
+        "schedule": "https://www.cinema-lechampo.com/films/horaires.html"
+      }
+    },
+    {
+      "id": "body_yoga_republique",
+      "categoryId": "body",
+      "title": "Studio Yoga République",
+      "address": "21 rue Béranger, 75003 Paris",
+      "x": 440,
+      "y": 290,
+      "lat": 48.8647,
+      "lng": 2.3603,
+      "why": "Practice without spectacle.",
+      "tags": {
+        "price": "€€",
+        "time": "2–3h",
+        "solo": "very",
+        "bestMoment": "morning"
+      },
+      "microQuest": "Stay five minutes lying down after class.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Studio+Yoga+République",
+        "booking": "https://studio-yoga-republique.fr"
+      }
+    },
+    {
+      "id": "care_hammam_mosquee",
+      "categoryId": "care",
+      "title": "Hammam de la Grande Mosquée de Paris",
+      "address": "39 rue Geoffroy-Saint-Hilaire, 75005 Paris",
+      "x": 420,
+      "y": 320,
+      "lat": 48.8429,
+      "lng": 2.3563,
+      "why": "A ritual older than intention.",
+      "tags": {
+        "price": "€€",
+        "time": "2–3h",
+        "solo": "yes",
+        "bestMoment": "afternoon"
+      },
+      "microQuest": "Leave without speaking for ten minutes.",
+      "actions": {
+        "maps": "https://maps.google.fr/?q=Hammam+Grande+Mosquée+Paris"
+      }
+    }
+  ],
+  "companions": [
+    {
+      "id": "bluets",
+      "title": "Bluets",
+      "author": "Maggie Nelson",
+      "moment": "afternoon garden",
+      "why": "Fragments that tolerate interruption.",
+      "microQuest": "Read one fragment standing.",
+      "actions": {
+        "buy": "https://www.wavepoetry.com/products/bluets"
+      }
+    },
+    {
+      "id": "exteriors",
+      "title": "Exteriors",
+      "author": "Annie Ernaux",
+      "moment": "morning café",
+      "why": "Observation without commentary.",
+      "microQuest": "Read one page before looking up.",
+      "actions": {
+        "buy": "https://www.annie-ernaux.org/publications/"
+      }
+    },
+    {
+      "id": "disquiet",
+      "title": "The Book of Disquiet",
+      "author": "Fernando Pessoa",
+      "moment": "late evening",
+      "why": "A city inside the city.",
+      "microQuest": "Stop mid-paragraph.",
+      "actions": {
+        "buy": "https://www.ndbooks.com/book/the-book-of-disquiet-the-complete-edition/"
+      }
+    }
+  ],
+  "quests": [
+    {
+      "id": "left_bank_studios",
+      "title": "Left Bank Studios",
+      "feel": "Quiet rooms, ateliers, slow exits.",
+      "steps": [
+        { "type": "place", "label": "Musée Zadkine" },
+        { "type": "place", "label": "Musée Bourdelle" },
+        { "type": "place", "label": "Jardin Catherine-Labouré" },
+        { "type": "slot", "label": "Table nearby" },
+        { "type": "companion", "label": "Reading Companion" },
+        { "type": "place", "label": "Le Champo" }
+      ],
+      "mapsDirections": "https://www.google.com/maps/dir/?api=1&origin=Mus%C3%A9e+Zadkine+Paris&destination=Le+Champo+Paris&waypoints=Mus%C3%A9e+Bourdelle+Paris%7CJardin+Catherine-Labour%C3%A9+Paris&travelmode=walking"
+    }
+  ]
+}

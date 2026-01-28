@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SouvenirHome from './pages/souvenir/Home';
 import SouvenirProfiles from './pages/souvenir/SouvenirProfiles';
 import ProfileMapView from './pages/souvenir/ProfileMapView';
+import BohemianProfileView from './pages/souvenir/BohemianProfileView';
 import MyParis from './pages/souvenir/MyParis';
 import SharePage from './pages/souvenir/SharePage';
 import Gift from './pages/souvenir/Gift';
@@ -44,6 +45,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<SouvenirHome />} />
             <Route path="/souvenir" element={<SouvenirProfiles />} />
+            <Route path="/souvenir/bohemian" element={<BohemianProfileView />} />
             <Route path="/souvenir/:profile" element={<ProfileMapView />} />
             <Route path="/create" element={<MyParis />} />
             <Route path="/share" element={<SharePage />} />
