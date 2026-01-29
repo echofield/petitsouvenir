@@ -1,7 +1,7 @@
 /**
  * Petit Souvenir — Coffret packs config
  * Pack ids map to included profile ids and optional presets.
- * Single source of truth: complete pack derives from PETIT_SOUVENIR_DATA.
+ * Romance is coffret-only (not in main Profiles list).
  */
 
 import type { SouvenirProfileId } from '../utils/souvenir-lock';
@@ -9,13 +9,16 @@ import { PETIT_SOUVENIR_DATA } from './petit-souvenir-types';
 
 export type CoffretTier = 'one' | 'weekend' | 'complete';
 
+/** Main list (Profiles page) + Romance (coffret-only) */
+export type CoffretProfileId = SouvenirProfileId | 'romance';
+
 export interface CoffretPreset {
   tier: CoffretTier;
-  profiles: SouvenirProfileId[];
+  profiles: CoffretProfileId[];
   presets?: string[];
 }
 
-/** Single source of truth: same as Profiles list */
+/** Single source of truth: main Profiles list only (bohemian, family, night). Romance is coffret-only. */
 export function getAllProfileIds(): SouvenirProfileId[] {
   return PETIT_SOUVENIR_DATA.profiles.map((p) => p.id as SouvenirProfileId);
 }
@@ -23,9 +26,11 @@ export function getAllProfileIds(): SouvenirProfileId[] {
 const ALL_IDS = getAllProfileIds();
 
 export const COFFRET_PRESETS: Record<string, CoffretPreset> = {
-  bohemian_one: {
+  /** One Coffret = Romance only (Hotel Edition). Not on main Profiles list. */
+  romance_one: {
     tier: 'one',
-    profiles: ['bohemian'],
+    profiles: ['romance'],
+    presets: ['grand_amour_2d'],
   },
   weekend_bohemian_family: {
     tier: 'weekend',

@@ -10,6 +10,7 @@ import SouvenirHome from './pages/souvenir/Home';
 import SouvenirProfiles from './pages/souvenir/SouvenirProfiles';
 import ProfileMapView from './pages/souvenir/ProfileMapView';
 import BohemianProfileView from './pages/souvenir/BohemianProfileView';
+import RomanceProfileView from './pages/souvenir/RomanceProfileView';
 import MyParis from './pages/souvenir/MyParis';
 import SharePage from './pages/souvenir/SharePage';
 import Gift from './pages/souvenir/Gift';
@@ -65,6 +66,7 @@ export default function App() {
               <Route path="/" element={<SouvenirHome />} />
               <Route path="/souvenir" element={<SouvenirProfiles />} />
               <Route path="/souvenir/bohemian" element={<BohemianProfileView />} />
+              <Route path="/souvenir/romance" element={<RomanceProfileView />} />
               <Route path="/souvenir/:profile" element={<ProfileMapView />} />
               <Route path="/create" element={<MyParis />} />
               <Route path="/share" element={<SharePage />} />

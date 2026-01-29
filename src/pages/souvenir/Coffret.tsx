@@ -8,7 +8,7 @@ import { BackButton } from '../../components/BackButton';
 import { getCoffretPack, getAllProfileIds } from '../../data/coffret-presets';
 
 const TIERS = [
-  { packId: 'bohemian_one', title: 'One Coffret', subline: 'One profile.' },
+  { packId: 'romance_one', title: 'One Coffret', subline: 'Romance — Hotel Edition.' },
   { packId: 'weekend_bohemian_family', title: 'Weekend Coffret', subline: 'Two profiles.' },
   { packId: 'complete', title: 'Complete Coffret', subline: `${getAllProfileIds().length} profiles.` },
 ];
