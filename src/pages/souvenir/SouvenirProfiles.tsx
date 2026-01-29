@@ -1,17 +1,36 @@
 /**
  * Petit Souvenir — Profile selection (/souvenir)
- * Shows promise, rules, and unlock/start buttons
+ * Shows promise, rules, and unlock/start buttons.
+ * Coffret mode: sort pack profiles first, show "In this coffret" micro-label.
  */
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useMemo } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
 import { PETIT_SOUVENIR_DATA } from '../../data/petit-souvenir-types';
+import { getCoffretPack } from '../../data/coffret-presets';
 import { isProfileUnlocked, STRIPE_PAYMENT_LINK } from '../../utils/souvenir-lock';
 
 export default function SouvenirProfiles() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [expandedProfile, setExpandedProfile] = useState<string | null>(null);
+
+  const mode = searchParams.get('mode');
+  const packId = searchParams.get('pack');
+  const pack = packId ? getCoffretPack(packId) : undefined;
+  const isCoffretMode = mode === 'coffret' && pack;
+
+  const { sortedProfiles, includedIds } = useMemo(() => {
+    const profiles = PETIT_SOUVENIR_DATA.profiles;
+    if (!isCoffretMode || !pack) {
+      return { sortedProfiles: profiles, includedIds: new Set<string>() };
+    }
+    const ids = new Set(pack.profiles);
+    const included = profiles.filter((p) => ids.has(p.id));
+    const rest = profiles.filter((p) => !ids.has(p.id));
+    return { sortedProfiles: [...included, ...rest], includedIds: ids };
+  }, [isCoffretMode, pack]);
 
   return (
     <>
@@ -44,9 +63,10 @@ export default function SouvenirProfiles() {
             gap: 40,
           }}
         >
-          {PETIT_SOUVENIR_DATA.profiles.map((profile) => {
+          {sortedProfiles.map((profile) => {
             const unlocked = isProfileUnlocked(profile.id);
             const expanded = expandedProfile === profile.id;
+            const inCoffret = includedIds.has(profile.id);
 
             return (
               <div
@@ -68,18 +88,35 @@ export default function SouvenirProfiles() {
                   }}
                 >
                   <div style={{ flex: 1 }}>
-                    <h2
-                      style={{
-                        fontFamily: 'Cormorant Garamond, Georgia, serif',
-                        fontSize: 28,
-                        fontWeight: 500,
-                        color: '#0E3F2F',
-                        marginBottom: 8,
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {profile.name}
-                    </h2>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
+                      <h2
+                        style={{
+                          fontFamily: 'Cormorant Garamond, Georgia, serif',
+                          fontSize: 28,
+                          fontWeight: 500,
+                          color: '#0E3F2F',
+                          margin: 0,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {profile.name}
+                      </h2>
+                      {inCoffret && (
+                        <span
+                          style={{
+                            fontFamily: 'Inter, sans-serif',
+                            fontSize: 9,
+                            fontWeight: 400,
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            color: '#2B2B2B',
+                            opacity: 0.4,
+                          }}
+                        >
+                          In this coffret
+                        </span>
+                      )}
+                    </div>
                     <p
                       style={{
                         fontFamily: 'Cormorant Garamond, Georgia, serif',
@@ -216,13 +253,12 @@ export default function SouvenirProfiles() {
                         textTransform: 'uppercase',
                         padding: '14px 28px',
                         background: unlocked ? '#0E3F2F' : 'transparent',
-                          color: unlocked ? '#FAF9F6' : '#0E3F2F',
-                          border: unlocked ? 'none' : '0.5px solid rgba(14, 63, 47, 0.3)',
-                          cursor: unlocked ? 'pointer' : 'default',
-                          transition: 'all 400ms ease',
-                          opacity: unlocked ? 1 : 0.7,
-                          background: unlocked ? '#0E3F2F' : 'transparent',
-                        }}
+                        color: unlocked ? '#FAF9F6' : '#0E3F2F',
+                        border: unlocked ? 'none' : '0.5px solid rgba(14, 63, 47, 0.3)',
+                        cursor: unlocked ? 'pointer' : 'default',
+                        transition: 'all 400ms ease',
+                        opacity: unlocked ? 1 : 0.7,
+                      }}
                         onMouseEnter={(e) => {
                           if (unlocked) {
                             e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)';

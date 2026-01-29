@@ -24,6 +24,8 @@ export default function BohemianProfileView() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const companionsRef = useRef<HTMLDivElement>(null);
+  const questsRef = useRef<HTMLDivElement>(null);
+  const presetId = searchParams.get('preset');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<BohemianPlace | null>(null);
   const [questSavedEvent, setQuestSavedEvent] = useState(0);
@@ -95,6 +97,13 @@ export default function BohemianProfileView() {
       companionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [selectedCategory]);
+
+  // Hotel Edition: when preset in query, scroll to Quests section
+  useEffect(() => {
+    if (presetId && questsRef.current) {
+      questsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [presetId]);
 
   const handleSave = (placeId: string) => {
     addPlace(placeId);
@@ -403,11 +412,14 @@ export default function BohemianProfileView() {
 
       {/* Quests Section */}
       {showQuests && profileData.quests.length > 0 && (
-        <QuestsSection 
-          quests={profileData.quests} 
-          archetypeId={profileId}
-          onQuestSaveChange={() => setQuestSavedEvent((prev) => prev + 1)} 
-        />
+        <div ref={questsRef}>
+          <QuestsSection
+            quests={profileData.quests}
+            archetypeId={profileId}
+            onQuestSaveChange={() => setQuestSavedEvent((prev) => prev + 1)}
+            highlightedQuestId={presetId ?? undefined}
+          />
+        </div>
       )}
     </>
   );

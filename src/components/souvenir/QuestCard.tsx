@@ -13,9 +13,10 @@ export interface QuestCardProps {
   quest: Quest;
   archetypeId: string;
   onSaveChange?: () => void;
+  emphasized?: boolean;
 }
 
-export function QuestCard({ quest, archetypeId, onSaveChange }: QuestCardProps) {
+export function QuestCard({ quest, archetypeId, onSaveChange, emphasized }: QuestCardProps) {
   const [saved, setSaved] = useState(isQuestSaved(quest.id));
 
   useEffect(() => {
@@ -49,6 +50,14 @@ export function QuestCard({ quest, archetypeId, onSaveChange }: QuestCardProps) 
       style={{
         padding: '32px 0',
         borderBottom: '0.5px solid rgba(14, 63, 47, 0.2)',
+        ...(emphasized
+          ? {
+              borderLeft: '2px solid rgba(14, 63, 47, 0.25)',
+              paddingLeft: 16,
+              marginLeft: -16,
+              background: 'rgba(14, 63, 47, 0.03)',
+            }
+          : {}),
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>

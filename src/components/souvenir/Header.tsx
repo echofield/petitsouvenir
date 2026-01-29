@@ -14,6 +14,7 @@ export function Header() {
   }
   
   const isActive = (path: string) => location.pathname === path;
+  const isCoffretActive = location.pathname.startsWith('/coffret');
 
   return (
     <header
@@ -125,6 +126,32 @@ export function Header() {
             }}
           >
             Profiles
+          </Link>
+          <Link
+            to="/coffret"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 10,
+              fontWeight: isCoffretActive ? 500 : 400,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#2B2B2B',
+              opacity: isCoffretActive ? 0.9 : 0.5,
+              textDecoration: 'none',
+              transition: 'opacity 300ms ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!isCoffretActive) {
+                e.currentTarget.style.opacity = '0.7';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isCoffretActive) {
+                e.currentTarget.style.opacity = '0.5';
+              }
+            }}
+          >
+            COFFRET
           </Link>
           <Link
             to="/about"

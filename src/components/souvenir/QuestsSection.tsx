@@ -10,9 +10,10 @@ export interface QuestsSectionProps {
   quests: Quest[];
   archetypeId: string;
   onQuestSaveChange?: () => void;
+  highlightedQuestId?: string;
 }
 
-export function QuestsSection({ quests, archetypeId, onQuestSaveChange }: QuestsSectionProps) {
+export function QuestsSection({ quests, archetypeId, onQuestSaveChange, highlightedQuestId }: QuestsSectionProps) {
   if (quests.length === 0) return null;
 
   return (
@@ -38,7 +39,13 @@ export function QuestsSection({ quests, archetypeId, onQuestSaveChange }: Quests
       </h2>
       <div>
         {quests.map((quest) => (
-          <QuestCard key={quest.id} quest={quest} archetypeId={archetypeId} onSaveChange={onQuestSaveChange} />
+          <QuestCard
+            key={quest.id}
+            quest={quest}
+            archetypeId={archetypeId}
+            onSaveChange={onQuestSaveChange}
+            emphasized={highlightedQuestId === quest.id}
+          />
         ))}
       </div>
     </section>
