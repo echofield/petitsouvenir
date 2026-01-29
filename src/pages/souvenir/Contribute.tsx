@@ -1,6 +1,6 @@
 /**
- * Petit Souvenir — Participate (/participate)
- * Partners / venues can submit a request to be considered. No pay-to-play, no directory.
+ * Petit Souvenir — Contribute (/contribute)
+ * Leave a trace. No rules, no promise, no timeline.
  */
 
 import { useState } from 'react';
@@ -52,14 +52,14 @@ const inputStyle = {
   marginBottom: 20,
 };
 
-export default function Participate() {
+export default function Contribute() {
   const navigate = useNavigate();
   const [type, setType] = useState('');
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [website, setWebsite] = useState('');
   const [contactEmail, setContactEmail] = useState('');
-  const [whatIsTheGesture, setWhatIsTheGesture] = useState('');
+  const [gesture, setGesture] = useState('');
   const [archetypes, setArchetypes] = useState<string[]>([]);
   const [notes, setNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -81,14 +81,14 @@ export default function Participate() {
         address: address.trim(),
         website: website.trim() || null,
         contact_email: contactEmail.trim(),
-        gesture: whatIsTheGesture.trim(),
+        gesture: gesture.trim(),
         archetypes: archetypes.length ? archetypes : [],
         notes: notes.trim() || null,
       });
       if (err) throw err;
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not send request.');
+      setError(err instanceof Error ? err.message : 'Could not leave trace.');
     } finally {
       setSubmitting(false);
     }
@@ -116,7 +116,7 @@ export default function Participate() {
             lineHeight: 1.3,
           }}
         >
-          Participate
+          Contribute
         </h1>
         <p
           style={{
@@ -129,76 +129,29 @@ export default function Participate() {
             lineHeight: 1.6,
           }}
         >
-          Petit Souvenir is curated. Participation is reviewed.
+          Some gestures belong to the city more than to commerce.
         </p>
 
-        <div style={{ textAlign: 'left', marginBottom: 48 }}>
-          <h2
-            style={{
-              fontFamily: sans,
-              fontSize: 10,
-              fontWeight: 500,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: green,
-              opacity: 0.7,
-              marginBottom: 16,
-              lineHeight: 1.3,
-            }}
-          >
-            What participation means
-          </h2>
-          <ul
-            style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: 0,
-              fontFamily: serif,
-              fontSize: 16,
-              fontWeight: 300,
-              lineHeight: 2,
-              ...muted,
-            }}
-          >
-            <li>You may propose a place, a ritual, or a small guest privilege.</li>
-            <li>We do not accept payments for inclusion.</li>
-            <li>If accepted, we may invite you into a partner format later.</li>
-          </ul>
-        </div>
-
-        <div style={{ textAlign: 'left', marginBottom: 48 }}>
-          <h2
-            style={{
-              fontFamily: sans,
-              fontSize: 10,
-              fontWeight: 500,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: green,
-              opacity: 0.7,
-              marginBottom: 16,
-              lineHeight: 1.3,
-            }}
-          >
-            What we look for
-          </h2>
-          <ul
-            style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: 0,
-              fontFamily: serif,
-              fontSize: 16,
-              fontWeight: 300,
-              lineHeight: 2,
-              ...muted,
-            }}
-          >
-            <li>Quiet service</li>
-            <li>Consistency</li>
-            <li>A real gesture (not marketing)</li>
-            <li>Fits at least one archetype</li>
-          </ul>
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: 480,
+            margin: '0 auto 48px',
+            fontFamily: serif,
+            fontSize: 16,
+            fontWeight: 300,
+            lineHeight: 1.9,
+            ...muted,
+          }}
+        >
+          <p style={{ marginBottom: 12 }}>Some places offer more than what appears on the menu.</p>
+          <p style={{ marginBottom: 12 }}>A gesture.</p>
+          <p style={{ marginBottom: 12 }}>A way of welcoming.</p>
+          <p style={{ marginBottom: 12 }}>A detail that cannot be copied.</p>
+          <p style={{ marginBottom: 12 }}>
+            If your place carries something of that nature, you may leave a trace below.
+          </p>
+          <p style={{ marginBottom: 0 }}>That&rsquo;s it.</p>
         </div>
 
         {submitted ? (
@@ -211,11 +164,11 @@ export default function Participate() {
               lineHeight: 1.6,
             }}
           >
-            Received. If it fits, we&rsquo;ll reply.
+            Trace left.
           </p>
         ) : (
           <form onSubmit={handleSubmit} style={{ textAlign: 'left', maxWidth: 480, margin: '0 auto' }}>
-            <label style={labelStyle}>Type</label>
+            <label style={labelStyle}>Nature of the place</label>
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
@@ -230,7 +183,7 @@ export default function Participate() {
               ))}
             </select>
 
-            <label style={labelStyle}>Name</label>
+            <label style={labelStyle}>Place name</label>
             <input
               type="text"
               value={name}
@@ -239,7 +192,7 @@ export default function Participate() {
               style={inputStyle}
             />
 
-            <label style={labelStyle}>Address</label>
+            <label style={labelStyle}>Where it is</label>
             <input
               type="text"
               value={address}
@@ -248,7 +201,7 @@ export default function Participate() {
               style={inputStyle}
             />
 
-            <label style={labelStyle}>Website</label>
+            <label style={labelStyle}>Website (if any)</label>
             <input
               type="url"
               value={website}
@@ -257,7 +210,7 @@ export default function Participate() {
               style={inputStyle}
             />
 
-            <label style={labelStyle}>Contact email</label>
+            <label style={labelStyle}>A way to reach you</label>
             <input
               type="email"
               value={contactEmail}
@@ -266,16 +219,16 @@ export default function Participate() {
               style={inputStyle}
             />
 
-            <label style={labelStyle}>If you could offer one small gesture that feels real, what is it?</label>
+            <label style={labelStyle}>Is there a gesture your place already carries?</label>
             <textarea
-              value={whatIsTheGesture}
-              onChange={(e) => setWhatIsTheGesture(e.target.value)}
+              value={gesture}
+              onChange={(e) => setGesture(e.target.value)}
               required
               rows={4}
               style={{ ...inputStyle, resize: 'vertical', minHeight: 80 }}
             />
 
-            <label style={labelStyle}>Archetype fit</label>
+            <label style={labelStyle}>Which world does it resonate with?</label>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 20 }}>
               {ARCHETYPE_OPTIONS.map((o) => (
                 <label
@@ -301,7 +254,7 @@ export default function Participate() {
               ))}
             </div>
 
-            <label style={labelStyle}>Notes (optional)</label>
+            <label style={labelStyle}>Anything else you wish to share</label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -331,7 +284,7 @@ export default function Participate() {
                 transition: 'all 400ms ease',
               }}
             >
-              {submitting ? 'Sending…' : 'Send request'}
+              {submitting ? 'Leaving…' : 'Leave a trace'}
             </button>
           </form>
         )}

@@ -15,7 +15,7 @@ export function Header() {
   
   const isActive = (path: string) => location.pathname === path;
   const isCoffretActive = location.pathname.startsWith('/coffret');
-  const isParticipateActive = location.pathname === '/participate';
+  const isContributeActive = location.pathname === '/contribute';
   const isPrivacyActive = location.pathname === '/privacy';
 
   return (
@@ -182,30 +182,30 @@ export function Header() {
             COFFRET
           </Link>
           <Link
-            to="/participate"
+            to="/contribute"
             style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: 10,
-              fontWeight: isParticipateActive ? 500 : 400,
+              fontWeight: isContributeActive ? 500 : 400,
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               color: '#2B2B2B',
-              opacity: isParticipateActive ? 0.9 : 0.5,
+              opacity: isContributeActive ? 0.9 : 0.5,
               textDecoration: 'none',
               transition: 'opacity 300ms ease',
             }}
             onMouseEnter={(e) => {
-              if (!isParticipateActive) {
+              if (!isContributeActive) {
                 e.currentTarget.style.opacity = '0.7';
               }
             }}
             onMouseLeave={(e) => {
-              if (!isParticipateActive) {
+              if (!isContributeActive) {
                 e.currentTarget.style.opacity = '0.5';
               }
             }}
           >
-            Participate
+            Contribute
           </Link>
           <Link
             to="/about"

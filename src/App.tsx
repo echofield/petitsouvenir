@@ -3,7 +3,7 @@
  * Router: / → Petit Souvenir Home; /arche → ARCHÉ experience.
  */
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/souvenir/Header';
 import { Footer } from './components/souvenir/Footer';
 import SouvenirHome from './pages/souvenir/Home';
@@ -19,7 +19,7 @@ import CoffretRomanceHotel from './pages/souvenir/CoffretRomanceHotel';
 import SharedTraceView from './pages/souvenir/SharedTraceView';
 import About from './pages/souvenir/About';
 import Privacy from './pages/souvenir/Privacy';
-import Participate from './pages/souvenir/Participate';
+import Contribute from './pages/souvenir/Contribute';
 import ArcheShell from './pages/arche/ArcheShell';
 
 // Dev helper (only in development)
@@ -80,7 +80,8 @@ export default function App() {
               <Route path="/t/:shareCode" element={<SharedTraceView />} />
               <Route path="/about" element={<About />} />
               <Route path="/privacy" element={<Privacy />} />
-              <Route path="/participate" element={<Participate />} />
+              <Route path="/contribute" element={<Contribute />} />
+              <Route path="/participate" element={<Navigate to="/contribute" replace />} />
               {/* Preserve /arche — cultural core. Never remove. Not for users — for you. */}
               <Route path="/arche" element={<ArcheShell />} />
             </Routes>

@@ -52,12 +52,12 @@ export function Footer() {
             About
           </Link>
           <Link
-            to="/participate"
+            to="/contribute"
             style={linkStyle}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
             onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
           >
-            Participate
+            Contribute
           </Link>
           <Link
             to="/privacy"
@@ -67,14 +67,6 @@ export function Footer() {
           >
             Privacy
           </Link>
-          <a
-            href="mailto:contact@petitsouvenir.com"
-            style={linkStyle}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
-          >
-            Contact
-          </a>
         </div>
         <p
           style={{
