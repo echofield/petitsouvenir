@@ -109,6 +109,11 @@ function QuestTraceView({ payload }: { payload: SharedTracePayload }) {
             {payload.dateLabel}
           </p>
         )}
+        {payload.startLabel != null && payload.startLabel !== '' && (
+          <p style={{ fontFamily: serif, fontSize: 14, fontWeight: 300, fontStyle: 'italic', ...muted, marginBottom: 8, lineHeight: 1.5 }}>
+            Started at {payload.startLabel}
+          </p>
+        )}
         {stepsLine != null && (
           <p style={{ fontFamily: sans, fontSize: 11, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', ...muted, lineHeight: 1.4 }}>
             {stepsLine}

@@ -40,10 +40,10 @@ export default function App() {
           @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
           @media (max-width: 768px) {
             section { padding-left: 24px !important; padding-right: 24px !important; }
-            nav { padding: 20px 24px !important; }
-            nav > div { flex-direction: column !important; gap: 20px !important; }
-            nav > div > div { gap: 24px !important; }
-            button[style*="position: fixed"][style*="top: 24px"] { left: 24px !important; z-index: 10000 !important; }
+            nav { padding: 16px 24px !important; }
+            nav > div { flex-direction: column !important; gap: 16px !important; }
+            nav > div > div { gap: 20px !important; }
+            button[style*="position: fixed"][style*="top: 24px"] { left: 24px !important; z-index: 10000 !important; min-height: 44px !important; padding-top: 12px !important; padding-bottom: 12px !important; }
             button[style*="position: fixed"][style*="top: 24px"] span:last-child { display: none !important; }
             .blason-container { z-index: 10000 !important; top: 16px !important; }
           }

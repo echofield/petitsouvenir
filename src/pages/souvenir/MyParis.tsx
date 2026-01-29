@@ -27,6 +27,7 @@ export default function MyParis() {
   );
   const [selectedPlace, setSelectedPlace] = useState<MapSectionPlace | null>(null);
   const [publishStatus, setPublishStatus] = useState<'idle' | 'publishing' | 'copied' | 'error'>('idle');
+  const [shareStatus, setShareStatus] = useState<'idle' | 'copied' | 'error'>('idle');
 
   const handleRemove = useCallback((place: MapSectionPlace) => {
     removePlace(place.id);
@@ -41,11 +42,19 @@ export default function MyParis() {
     }
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     saveNote(localNote);
     setData(loadMyParis());
+    setShareStatus('idle');
     const url = `${window.location.origin}/share?ids=${savedIds.join(',')}`;
-    void navigator.clipboard.writeText(url);
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareStatus('copied');
+      setTimeout(() => setShareStatus('idle'), 2500);
+    } catch {
+      setShareStatus('error');
+      setTimeout(() => setShareStatus('idle'), 2500);
+    }
   };
 
   const handlePublishMap = async () => {
@@ -148,7 +157,7 @@ export default function MyParis() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
             <button
               type="button"
-              onClick={handleShare}
+              onClick={() => handleShare()}
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 10,
@@ -161,10 +170,21 @@ export default function MyParis() {
                 border: '0.5px solid rgba(14, 63, 47, 0.3)',
                 cursor: 'pointer',
                 transition: 'all 400ms ease',
+                minHeight: 44,
               }}
             >
               Share My Paris
             </button>
+            {shareStatus === 'copied' && (
+              <span style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: 14, fontWeight: 300, color: '#0E3F2F', opacity: 0.8 }}>
+                Link copied.
+              </span>
+            )}
+            {shareStatus === 'error' && (
+              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, color: '#8b3a3a', opacity: 0.9 }}>
+                Could not copy.
+              </span>
+            )}
             <button
               type="button"
               onClick={handlePublishMap}
@@ -182,6 +202,7 @@ export default function MyParis() {
                 cursor: publishStatus === 'publishing' || savedIds.length === 0 ? 'not-allowed' : 'pointer',
                 opacity: publishStatus === 'publishing' || savedIds.length === 0 ? 0.6 : 1,
                 transition: 'all 400ms ease',
+                minHeight: 44,
               }}
             >
               {publishStatus === 'publishing' ? 'Publishing…' : 'Publish My Map'}

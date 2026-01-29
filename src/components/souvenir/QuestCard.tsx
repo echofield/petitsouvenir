@@ -30,6 +30,7 @@ export function QuestCard({ quest, archetypeId, onSaveChange, emphasized }: Ques
   const [publishing, setPublishing] = useState(false);
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
   const [noteInput, setNoteInput] = useState(trace?.note ?? '');
+  const [startLabel, setStartLabel] = useState('');
 
   useEffect(() => {
     setTrace(getQuestTrace(quest.id));
@@ -88,7 +89,7 @@ export function QuestCard({ quest, archetypeId, onSaveChange, emphasized }: Ques
     setPublishing(true);
     setCopyStatus('idle');
     try {
-      const { url } = await publishQuestTrace(quest.id, archetypeId);
+      const { url } = await publishQuestTrace(quest.id, archetypeId, { startLabel: startLabel.trim() || undefined });
       await navigator.clipboard.writeText(url);
       setCopyStatus('copied');
       setTimeout(() => setCopyStatus('idle'), 2500);
@@ -338,6 +339,42 @@ export function QuestCard({ quest, archetypeId, onSaveChange, emphasized }: Ques
               onBlur={handleNoteBlur}
               placeholder="One line."
               maxLength={200}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                fontFamily: 'Cormorant Garamond, Georgia, serif',
+                fontSize: 15,
+                fontWeight: 300,
+                color: '#2B2B2B',
+                background: 'transparent',
+                border: '0.5px solid rgba(14, 63, 47, 0.2)',
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            <label
+              htmlFor={`quest-start-${quest.id}`}
+              style={{
+                display: 'block',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 10,
+                fontWeight: 500,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: '#2B2B2B',
+                opacity: 0.5,
+                marginBottom: 6,
+              }}
+            >
+              Where did you start? (optional, no tracking)
+            </label>
+            <input
+              id={`quest-start-${quest.id}`}
+              type="text"
+              value={startLabel}
+              onChange={(e) => setStartLabel(e.target.value)}
+              placeholder="e.g. Musée Zadkine, Jardin du Luxembourg"
+              maxLength={120}
               style={{
                 width: '100%',
                 padding: '10px 12px',

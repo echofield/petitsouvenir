@@ -30,6 +30,7 @@ export type SharedTracePayload = {
   archetype: { id: string; name: string };
   quest: { id: string; title: string; feel: string };
   dateLabel?: string;
+  startLabel?: string;
   steps: SharedTraceStep[];
   places: SharedTracePlace[];
   note?: string;
@@ -67,7 +68,7 @@ function toResolvedPlace(r: ResolvedPlace): SharedTracePlace {
 export function buildSharedTracePayload(
   questId: string,
   archetypeId: string,
-  opts?: { mediaUrls?: string[] }
+  opts?: { mediaUrls?: string[]; startLabel?: string }
 ): SharedTracePayload | null {
   const profile = getBohemianProfile();
   const quest = getBohemianQuestById(questId) ?? profile.quests.find((q) => q.id === questId);
@@ -118,6 +119,7 @@ export function buildSharedTracePayload(
     archetype: { id: profile.profile.id, name: profile.profile.name },
     quest: { id: quest.id, title: quest.title, feel: quest.feel },
     dateLabel,
+    startLabel: opts?.startLabel?.trim() || undefined,
     steps,
     places,
     note: trace.note ?? undefined,
@@ -171,7 +173,7 @@ export function buildSharedMapPayload(
 export async function publishQuestTrace(
   questId: string,
   archetypeId: string,
-  opts?: { mediaUrls?: string[] }
+  opts?: { mediaUrls?: string[]; startLabel?: string }
 ): Promise<{ shareCode: string; url: string }> {
   const payload = buildSharedTracePayload(questId, archetypeId, opts);
   if (!payload) throw new Error('Quest trace not found');
