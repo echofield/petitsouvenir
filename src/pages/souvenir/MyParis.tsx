@@ -185,28 +185,42 @@ export default function MyParis() {
                 Could not copy.
               </span>
             )}
-            <button
-              type="button"
-              onClick={handlePublishMap}
-              disabled={publishStatus === 'publishing' || savedIds.length === 0}
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                padding: '14px 28px',
-                background: 'transparent',
-                color: '#0E3F2F',
-                border: '0.5px solid rgba(14, 63, 47, 0.25)',
-                cursor: publishStatus === 'publishing' || savedIds.length === 0 ? 'not-allowed' : 'pointer',
-                opacity: publishStatus === 'publishing' || savedIds.length === 0 ? 0.6 : 1,
-                transition: 'all 400ms ease',
-                minHeight: 44,
-              }}
-            >
-              {publishStatus === 'publishing' ? 'Publishing…' : 'Publish My Map'}
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <button
+                type="button"
+                onClick={handlePublishMap}
+                disabled={publishStatus === 'publishing' || savedIds.length === 0}
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 10,
+                  fontWeight: 500,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  padding: '14px 28px',
+                  background: 'transparent',
+                  color: '#0E3F2F',
+                  border: '0.5px solid rgba(14, 63, 47, 0.25)',
+                  cursor: publishStatus === 'publishing' || savedIds.length === 0 ? 'not-allowed' : 'pointer',
+                  opacity: publishStatus === 'publishing' || savedIds.length === 0 ? 0.6 : 1,
+                  transition: 'all 400ms ease',
+                  minHeight: 44,
+                }}
+              >
+                {publishStatus === 'publishing' ? 'Saving…' : 'Save a memory'}
+              </button>
+              <span
+                style={{
+                  fontFamily: 'Cormorant Garamond, Georgia, serif',
+                  fontSize: 12,
+                  fontWeight: 300,
+                  color: '#2B2B2B',
+                  opacity: 0.5,
+                  lineHeight: 1.3,
+                }}
+              >
+                Creates an unlisted link you control.
+              </span>
+            </div>
             {publishStatus === 'copied' && (
               <span style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: 14, fontWeight: 300, color: '#0E3F2F', opacity: 0.8 }}>
                 Link copied.
@@ -214,7 +228,7 @@ export default function MyParis() {
             )}
             {publishStatus === 'error' && (
               <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, color: '#8b3a3a', opacity: 0.9 }}>
-                Could not publish.
+                Could not save.
               </span>
             )}
           </div>

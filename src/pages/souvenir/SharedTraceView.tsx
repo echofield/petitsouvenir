@@ -3,16 +3,36 @@
  * Fetch by share code, render quest trace or map share. Quiet, factual, minimal. No social features.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { MapSection, MapSectionPlace } from '../../components/souvenir/MapSection';
-import { fetchSharedTrace, type FetchedShared, type SharedTracePayload, type SharedMapPayload } from '../../utils/shared-traces';
-import { resolvePlaceForMap } from '../../utils/place-resolve';
+import { fetchSharedTrace, type FetchedShared, type SharedTracePayload, type SharedMapPayload, type SharedTracePlace } from '../../utils/shared-traces';
+import { resolvePlaceForMap, resolvePlaceForShare, findPlaceIdByTitle } from '../../utils/place-resolve';
+import { loadMyParis, saveSavedIds } from '../../utils/souvenir-storage';
+import { importQuestTrace } from '../../utils/quest-trace';
 
 const serif = 'Cormorant Garamond, Georgia, serif';
 const sans = 'Inter, sans-serif';
 const green = '#0E3F2F';
 const muted = { color: '#2B2B2B', opacity: 0.7 };
+
+function resolvePlaceIdsFromPayload(places: SharedTracePlace[]): string[] {
+  const seen = new Set<string>();
+  const ids: string[] = [];
+  for (const p of places) {
+    let id: string | null = null;
+    if (p.id != null && p.id !== '') {
+      const r = resolvePlaceForShare(p.id);
+      if (r?.id) id = r.id;
+    }
+    if (id == null) id = findPlaceIdByTitle(p.title);
+    if (id != null && !seen.has(id)) {
+      seen.add(id);
+      ids.push(id);
+    }
+  }
+  return ids;
+}
 
 export default function SharedTraceView() {
   const { shareCode } = useParams<{ shareCode: string }>();
@@ -90,6 +110,8 @@ export default function SharedTraceView() {
 }
 
 function QuestTraceView({ payload }: { payload: SharedTracePayload }) {
+  const [addToMapStatus, setAddToMapStatus] = useState<'idle' | 'added' | 'quest_imported' | 'none'>('idle');
+
   const mapPlaces: MapSectionPlace[] = payload.places
     .filter((p): p is typeof p & { id: string } => p.id != null)
     .map((p) => resolvePlaceForMap(p.id))
@@ -97,6 +119,22 @@ function QuestTraceView({ payload }: { payload: SharedTracePayload }) {
 
   const metrics = payload.metrics;
   const stepsLine = metrics != null ? `Steps: ${metrics.completedSteps}/${metrics.totalSteps}` : null;
+
+  const handleAddToMap = useCallback(() => {
+    const newIds = resolvePlaceIdsFromPayload(payload.places);
+    const { savedIds } = loadMyParis();
+    const merged = [...savedIds];
+    for (const id of newIds) {
+      if (!merged.includes(id)) merged.push(id);
+    }
+    saveSavedIds(merged);
+    const checkedStepIdx = payload.steps.filter((s) => s.done).map((s) => s.idx);
+    importQuestTrace(payload.quest.id, { checkedStepIdx, note: payload.note });
+    const countAdded = merged.length - savedIds.length;
+    if (countAdded >= 1) setAddToMapStatus('added');
+    else setAddToMapStatus('quest_imported');
+    setTimeout(() => setAddToMapStatus('idle'), 2500);
+  }, [payload.places, payload.steps, payload.quest.id, payload.note]);
 
   return (
     <>
@@ -119,6 +157,70 @@ function QuestTraceView({ payload }: { payload: SharedTracePayload }) {
             {stepsLine}
           </p>
         )}
+      </section>
+
+      <section style={{ maxWidth: 820, margin: '0 auto', padding: '0 40px 24px', textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
+          <button
+            type="button"
+            onClick={handleAddToMap}
+            style={{
+              fontFamily: sans,
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              padding: '12px 24px',
+              background: 'transparent',
+              color: green,
+              border: '0.5px solid rgba(14, 63, 47, 0.3)',
+              cursor: 'pointer',
+              transition: 'all 400ms ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '0.8';
+              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+            }}
+          >
+            Add to My Map
+          </button>
+          <Link
+            to="/create"
+            style={{
+              fontFamily: sans,
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: green,
+              opacity: 0.8,
+              textDecoration: 'none',
+              borderBottom: '0.5px solid rgba(14, 63, 47, 0.3)',
+              paddingBottom: 4,
+            }}
+          >
+            Open My Map
+          </Link>
+          {addToMapStatus === 'added' && (
+            <span style={{ fontFamily: serif, fontSize: 14, fontWeight: 300, color: green, opacity: 0.8 }}>
+              Added to My Map.
+            </span>
+          )}
+          {addToMapStatus === 'quest_imported' && (
+            <span style={{ fontFamily: serif, fontSize: 14, fontWeight: 300, color: green, opacity: 0.8 }}>
+              Quest imported.
+            </span>
+          )}
+          {addToMapStatus === 'none' && (
+            <span style={{ fontFamily: serif, fontSize: 14, fontWeight: 300, ...muted }}>
+              No matching places found.
+            </span>
+          )}
+        </div>
       </section>
 
       {mapPlaces.length > 0 && (
@@ -254,10 +356,26 @@ function QuestTraceView({ payload }: { payload: SharedTracePayload }) {
 }
 
 function MapShareView({ payload }: { payload: SharedMapPayload }) {
+  const [addToMapStatus, setAddToMapStatus] = useState<'idle' | 'added' | 'none'>('idle');
+
   const mapPlaces: MapSectionPlace[] = payload.places
     .filter((p): p is typeof p & { id: string } => p.id != null)
     .map((p) => resolvePlaceForMap(p.id))
     .filter((p): p is NonNullable<typeof p> => !!p) as MapSectionPlace[];
+
+  const handleAddToMap = useCallback(() => {
+    const newIds = resolvePlaceIdsFromPayload(payload.places);
+    const { savedIds } = loadMyParis();
+    const merged = [...savedIds];
+    for (const id of newIds) {
+      if (!merged.includes(id)) merged.push(id);
+    }
+    saveSavedIds(merged);
+    const countAdded = merged.length - savedIds.length;
+    if (countAdded >= 1) setAddToMapStatus('added');
+    else setAddToMapStatus('none');
+    setTimeout(() => setAddToMapStatus('idle'), 2500);
+  }, [payload.places]);
 
   return (
     <>
@@ -270,6 +388,65 @@ function MapShareView({ payload }: { payload: SharedMapPayload }) {
             {payload.metrics.savedCount} places
           </p>
         )}
+      </section>
+
+      <section style={{ maxWidth: 820, margin: '0 auto', padding: '0 40px 24px', textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
+          <button
+            type="button"
+            onClick={handleAddToMap}
+            style={{
+              fontFamily: sans,
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              padding: '12px 24px',
+              background: 'transparent',
+              color: green,
+              border: '0.5px solid rgba(14, 63, 47, 0.3)',
+              cursor: 'pointer',
+              transition: 'all 400ms ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '0.8';
+              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+            }}
+          >
+            Add to My Map
+          </button>
+          <Link
+            to="/create"
+            style={{
+              fontFamily: sans,
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: green,
+              opacity: 0.8,
+              textDecoration: 'none',
+              borderBottom: '0.5px solid rgba(14, 63, 47, 0.3)',
+              paddingBottom: 4,
+            }}
+          >
+            Open My Map
+          </Link>
+          {addToMapStatus === 'added' && (
+            <span style={{ fontFamily: serif, fontSize: 14, fontWeight: 300, color: green, opacity: 0.8 }}>
+              Added to My Map.
+            </span>
+          )}
+          {addToMapStatus === 'none' && (
+            <span style={{ fontFamily: serif, fontSize: 14, fontWeight: 300, ...muted }}>
+              No matching places found.
+            </span>
+          )}
+        </div>
       </section>
 
       {mapPlaces.length > 0 && (

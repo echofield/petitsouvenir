@@ -15,6 +15,8 @@ export function Header() {
   
   const isActive = (path: string) => location.pathname === path;
   const isCoffretActive = location.pathname.startsWith('/coffret');
+  const isParticipateActive = location.pathname === '/participate';
+  const isPrivacyActive = location.pathname === '/privacy';
 
   return (
     <header
@@ -180,6 +182,32 @@ export function Header() {
             COFFRET
           </Link>
           <Link
+            to="/participate"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 10,
+              fontWeight: isParticipateActive ? 500 : 400,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#2B2B2B',
+              opacity: isParticipateActive ? 0.9 : 0.5,
+              textDecoration: 'none',
+              transition: 'opacity 300ms ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!isParticipateActive) {
+                e.currentTarget.style.opacity = '0.7';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isParticipateActive) {
+                e.currentTarget.style.opacity = '0.5';
+              }
+            }}
+          >
+            Participate
+          </Link>
+          <Link
             to="/about"
             style={{
               fontFamily: 'Inter, sans-serif',
@@ -204,6 +232,32 @@ export function Header() {
             }}
           >
             About
+          </Link>
+          <Link
+            to="/privacy"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 10,
+              fontWeight: isPrivacyActive ? 500 : 400,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#2B2B2B',
+              opacity: isPrivacyActive ? 0.9 : 0.5,
+              textDecoration: 'none',
+              transition: 'opacity 300ms ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!isPrivacyActive) {
+                e.currentTarget.style.opacity = '0.7';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isPrivacyActive) {
+                e.currentTarget.style.opacity = '0.5';
+              }
+            }}
+          >
+            Privacy
           </Link>
         </nav>
       </div>

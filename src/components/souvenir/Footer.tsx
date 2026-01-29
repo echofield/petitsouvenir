@@ -13,6 +13,17 @@ export function Footer() {
     return null;
   }
   
+  const linkStyle = {
+    fontFamily: 'Inter, sans-serif',
+    fontSize: 9,
+    fontWeight: 400,
+    letterSpacing: '0.05em',
+    color: '#2B2B2B',
+    opacity: 0.4,
+    textDecoration: 'none' as const,
+    transition: 'opacity 300ms ease',
+  };
+
   return (
     <footer
       style={{
@@ -26,95 +37,59 @@ export function Footer() {
           maxWidth: 1600,
           margin: '0 auto',
           display: 'flex',
-          justifyContent: 'center',
-          gap: 32,
-          flexWrap: 'wrap',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 16,
         }}
       >
-        <Link
-          to="/about"
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 32 }}>
+          <Link
+            to="/about"
+            style={linkStyle}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
+          >
+            About
+          </Link>
+          <Link
+            to="/participate"
+            style={linkStyle}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
+          >
+            Participate
+          </Link>
+          <Link
+            to="/privacy"
+            style={linkStyle}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
+          >
+            Privacy
+          </Link>
+          <a
+            href="mailto:contact@petitsouvenir.com"
+            style={linkStyle}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
+          >
+            Contact
+          </a>
+        </div>
+        <p
           style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 9,
-            fontWeight: 400,
-            letterSpacing: '0.05em',
+            fontFamily: 'Cormorant Garamond, Georgia, serif',
+            fontSize: 13,
+            fontWeight: 300,
+            fontStyle: 'italic',
             color: '#2B2B2B',
             opacity: 0.4,
-            textDecoration: 'none',
-            transition: 'opacity 300ms ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.6';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.4';
+            margin: 0,
+            lineHeight: 1.4,
           }}
         >
-          About
-        </Link>
-        <a
-          href="mailto:contact@petitsouvenir.com"
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 9,
-            fontWeight: 400,
-            letterSpacing: '0.05em',
-            color: '#2B2B2B',
-            opacity: 0.4,
-            textDecoration: 'none',
-            transition: 'opacity 300ms ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.6';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.4';
-          }}
-        >
-          Contact
-        </a>
-        <a
-          href="/privacy"
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 9,
-            fontWeight: 400,
-            letterSpacing: '0.05em',
-            color: '#2B2B2B',
-            opacity: 0.4,
-            textDecoration: 'none',
-            transition: 'opacity 300ms ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.6';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.4';
-          }}
-        >
-          Privacy
-        </a>
-        <a
-          href="/terms"
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 9,
-            fontWeight: 400,
-            letterSpacing: '0.05em',
-            color: '#2B2B2B',
-            opacity: 0.4,
-            textDecoration: 'none',
-            transition: 'opacity 300ms ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.6';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.4';
-          }}
-        >
-          Terms
-        </a>
+          Paris, quietly.
+        </p>
       </div>
     </footer>
   );

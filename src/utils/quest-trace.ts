@@ -100,3 +100,22 @@ export function setQuestNote(questId: string, note: string): QuestTrace {
   saveStore(store);
   return trace;
 }
+
+/** Import a quest trace from shared payload. Overwrites existing trace for questId. */
+export function importQuestTrace(
+  questId: string,
+  opts: { checkedStepIdx: number[]; note?: string }
+): QuestTrace {
+  const store = loadQuestTraceStore();
+  const trace: QuestTrace = {
+    questId,
+    startedAt: now(),
+    completedAt: now(),
+    checkedStepIdx: opts.checkedStepIdx,
+    note: opts.note?.trim() || undefined,
+    updatedAt: now(),
+  };
+  store[questId] = trace;
+  saveStore(store);
+  return trace;
+}

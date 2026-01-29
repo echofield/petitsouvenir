@@ -431,31 +431,45 @@ export function QuestCard({ quest, archetypeId, onSaveChange, emphasized }: Ques
             >
               Complete
             </button>
-            <button
-              type="button"
-              onClick={handlePublish}
-              disabled={publishing}
-              style={{
-                ...btnBase,
-                background: 'transparent',
-                color: '#0E3F2F',
-                border: '0.5px solid rgba(14, 63, 47, 0.25)',
-                cursor: publishing ? 'wait' : 'pointer',
-                opacity: publishing ? 0.7 : 1,
-              }}
-              onMouseEnter={(e) => {
-                if (!publishing) {
-                  e.currentTarget.style.opacity = '0.85';
-                  e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.4)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = publishing ? 0.7 : 1;
-                e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.25)';
-              }}
-            >
-              {publishing ? 'Publishing…' : 'Publish trace'}
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4 }}>
+              <button
+                type="button"
+                onClick={handlePublish}
+                disabled={publishing}
+                style={{
+                  ...btnBase,
+                  background: 'transparent',
+                  color: '#0E3F2F',
+                  border: '0.5px solid rgba(14, 63, 47, 0.25)',
+                  cursor: publishing ? 'wait' : 'pointer',
+                  opacity: publishing ? 0.7 : 1,
+                }}
+                onMouseEnter={(e) => {
+                  if (!publishing) {
+                    e.currentTarget.style.opacity = '0.85';
+                    e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.4)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = publishing ? 0.7 : 1;
+                  e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.25)';
+                }}
+              >
+                {publishing ? 'Saving…' : 'Save a memory'}
+              </button>
+              <span
+                style={{
+                  fontFamily: 'Cormorant Garamond, Georgia, serif',
+                  fontSize: 12,
+                  fontWeight: 300,
+                  color: '#2B2B2B',
+                  opacity: 0.5,
+                  lineHeight: 1.3,
+                }}
+              >
+                Creates an unlisted link you control.
+              </span>
+            </div>
             {copyStatus === 'copied' && (
               <span
                 style={{
@@ -478,7 +492,7 @@ export function QuestCard({ quest, archetypeId, onSaveChange, emphasized }: Ques
                   opacity: 0.9,
                 }}
               >
-                Could not publish.
+                Could not save.
               </span>
             )}
             <button

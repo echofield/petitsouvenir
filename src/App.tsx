@@ -18,6 +18,8 @@ import Coffret from './pages/souvenir/Coffret';
 import CoffretRomanceHotel from './pages/souvenir/CoffretRomanceHotel';
 import SharedTraceView from './pages/souvenir/SharedTraceView';
 import About from './pages/souvenir/About';
+import Privacy from './pages/souvenir/Privacy';
+import Participate from './pages/souvenir/Participate';
 import ArcheShell from './pages/arche/ArcheShell';
 
 // Dev helper (only in development)
@@ -77,6 +79,8 @@ export default function App() {
               <Route path="/coffret/romance-hotel" element={<CoffretRomanceHotel />} />
               <Route path="/t/:shareCode" element={<SharedTraceView />} />
               <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/participate" element={<Participate />} />
               {/* Preserve /arche — cultural core. Never remove. Not for users — for you. */}
               <Route path="/arche" element={<ArcheShell />} />
             </Routes>

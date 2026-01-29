@@ -4,7 +4,7 @@
  * Never invent venues.
  */
 
-import { getSouvenirPlaceById } from '../data/souvenir-places';
+import { getSouvenirPlaceById, SOUVENIR_PLACES } from '../data/souvenir-places';
 import { getBohemianPlaceById, getBohemianProfile } from '../data/bohemian-types';
 import { buildGoogleMapsUrl } from './maps';
 import type { QuestStep } from '../data/bohemian-types';
@@ -16,6 +16,17 @@ export type ResolvedPlace = {
   maps?: string;
   categoryId?: string;
 };
+
+/** Find place id by exact title match (trim). Souvenir-places first, then bohemian. Never invent. */
+export function findPlaceIdByTitle(title: string): string | null {
+  const t = title.trim();
+  if (!t) return null;
+  const sp = SOUVENIR_PLACES.find((p) => p.name === t);
+  if (sp) return sp.id;
+  const profile = getBohemianProfile();
+  const bp = profile.places.find((p) => p.title === t);
+  return bp ? bp.id : null;
+}
 
 /** Resolve place by id for map share. Try souvenir-places, then bohemian. */
 export function resolvePlaceForShare(id: string): ResolvedPlace | null {
