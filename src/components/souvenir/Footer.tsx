@@ -5,13 +5,11 @@
 
 import { Link, useLocation } from 'react-router-dom';
 
-import { useLocation } from 'react-router-dom';
-
 export function Footer() {
   const location = useLocation();
   
-  // Hide footer on /arche (preserved ARCHÉ experience)
-  if (location.pathname.startsWith('/arche')) {
+  // Hide footer on /arche (preserved ARCHÉ experience) and /t (shared trace page is self-contained)
+  if (location.pathname.startsWith('/arche') || location.pathname.startsWith('/t/')) {
     return null;
   }
   

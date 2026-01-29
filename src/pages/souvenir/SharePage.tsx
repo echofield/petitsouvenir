@@ -6,16 +6,16 @@
 import { useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { MapSection, MapSectionPlace } from '../../components/souvenir/MapSection';
-import { getSouvenirPlaceById } from '../../data/souvenir-places';
+import { resolvePlaceForMap } from '../../utils/place-resolve';
 
 export default function SharePage() {
   const [searchParams] = useSearchParams();
   const idsParam = searchParams.get('ids') ?? '';
-  const ids = useMemo(() => idsParam.split(',').filter(Boolean), [idsParam]);
+  const ids = useMemo(() => idsParam.split(',').map((s) => s.trim()).filter(Boolean), [idsParam]);
   const places = useMemo(
     () =>
       ids
-        .map((id) => getSouvenirPlaceById(id.trim()))
+        .map((id) => resolvePlaceForMap(id))
         .filter((p): p is NonNullable<typeof p> => !!p) as MapSectionPlace[],
     [ids.join(',')]
   );

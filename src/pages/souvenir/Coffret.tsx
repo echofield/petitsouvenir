@@ -1,30 +1,31 @@
 /**
  * Petit Souvenir — Coffrets (/coffret)
- * Packaging / preset selector. Open, not Buy.
+ * Packaging / preset selector. Coffret is a contained world; only Romance Hotel ships for v0.
  */
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
-import { getCoffretPack, getAllProfileIds } from '../../data/coffret-presets';
+import { getAllProfileIds } from '../../data/coffret-presets';
 
 const TIERS = [
-  { packId: 'romance_one', title: 'One Coffret', subline: 'Romance — Hotel Edition.' },
-  { packId: 'weekend_bohemian_family', title: 'Weekend Coffret', subline: 'Two profiles.' },
+  { packId: 'romance_hotel', title: 'One Coffret', subline: 'Romance — Hotel Edition.' },
+  { packId: 'weekend', title: 'Weekend Coffret', subline: 'Two profiles.' },
   { packId: 'complete', title: 'Complete Coffret', subline: `${getAllProfileIds().length} profiles.` },
 ];
 
 export default function Coffret() {
   const navigate = useNavigate();
+  const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
   const handleOpen = (packId: string) => {
-    const pack = getCoffretPack(packId);
-    if (!pack) return;
-    if (pack.presets?.length && pack.profiles.length === 1) {
-      const profileId = pack.profiles[0];
-      const presetId = pack.presets[0];
-      navigate(`/souvenir/${profileId}?mode=coffret&pack=${packId}&preset=${presetId}&source=coffret`);
-    } else {
-      navigate(`/souvenir?mode=coffret&pack=${packId}&source=coffret`);
+    if (packId === 'romance_hotel') {
+      navigate('/coffret/romance-hotel');
+      return;
+    }
+    if (packId === 'weekend' || packId === 'complete') {
+      setComingSoonOpen(true);
+      return;
     }
   };
 
@@ -136,6 +137,91 @@ export default function Coffret() {
           ))}
         </div>
       </section>
+
+      {comingSoonOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="coming-soon-title"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 10000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(14, 63, 47, 0.08)',
+            padding: 24,
+          }}
+          onClick={() => setComingSoonOpen(false)}
+        >
+          <div
+            style={{
+              maxWidth: 400,
+              padding: '40px 32px',
+              border: '0.5px solid rgba(14, 63, 47, 0.2)',
+              background: '#FAF9F6',
+              textAlign: 'center',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2
+              id="coming-soon-title"
+              style={{
+                fontFamily: 'Cormorant Garamond, Georgia, serif',
+                fontSize: 24,
+                fontWeight: 500,
+                letterSpacing: '0.02em',
+                color: '#0E3F2F',
+                marginBottom: 16,
+                lineHeight: 1.3,
+              }}
+            >
+              Coming soon
+            </h2>
+            <p
+              style={{
+                fontFamily: 'Cormorant Garamond, Georgia, serif',
+                fontSize: 15,
+                fontWeight: 300,
+                color: '#2B2B2B',
+                opacity: 0.75,
+                marginBottom: 28,
+                lineHeight: 1.5,
+              }}
+            >
+              This Coffret is in preparation.
+            </p>
+            <button
+              type="button"
+              onClick={() => setComingSoonOpen(false)}
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 10,
+                fontWeight: 500,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                padding: '12px 28px',
+                background: 'transparent',
+                color: '#0E3F2F',
+                border: '0.5px solid rgba(14, 63, 47, 0.3)',
+                cursor: 'pointer',
+                transition: 'all 300ms ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '0.85';
+                e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

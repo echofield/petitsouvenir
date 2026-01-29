@@ -8,8 +8,8 @@ import { Link, useLocation } from 'react-router-dom';
 export function Header() {
   const location = useLocation();
   
-  // Hide header on /arche (preserved ARCHÉ experience)
-  if (location.pathname.startsWith('/arche')) {
+  // Hide header on /arche (preserved ARCHÉ experience) and /t (shared trace page is self-contained)
+  if (location.pathname.startsWith('/arche') || location.pathname.startsWith('/t/')) {
     return null;
   }
   
@@ -126,6 +126,32 @@ export function Header() {
             }}
           >
             Profiles
+          </Link>
+          <Link
+            to="/create"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 10,
+              fontWeight: isActive('/create') ? 500 : 400,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#2B2B2B',
+              opacity: isActive('/create') ? 0.9 : 0.5,
+              textDecoration: 'none',
+              transition: 'opacity 300ms ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!isActive('/create')) {
+                e.currentTarget.style.opacity = '0.7';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isActive('/create')) {
+                e.currentTarget.style.opacity = '0.5';
+              }
+            }}
+          >
+            My Map
           </Link>
           <Link
             to="/coffret"
