@@ -3,10 +3,13 @@
  * CarteInteractive must NEVER be modified.
  * All overlays and interactions live here.
  * If something seems missing, extend MapSection — do not touch the map.
+ * On mobile: single column layout; detail panel in bottom sheet.
  */
 
-import { CarteInteractive } from '../CarteInteractive';
+import { CarteInteractive, type MapVariant } from '../CarteInteractive';
 import { normToMap } from '../../utils/mapScale';
+import { useIsMobile } from '../ui/use-mobile';
+import { Sheet, SheetContent } from '../ui/sheet';
 
 export interface MapSectionPlace {
   id: string;
@@ -25,6 +28,103 @@ export interface MapSectionProps {
   onSavePlace?: (place: MapSectionPlace) => void;
   detailPanelMode?: DetailPanelMode;
   showList?: boolean;
+  mapVariant?: MapVariant;
+}
+
+function DetailPanelContent({
+  selectedPlace,
+  onSelectPlace,
+  onSavePlace,
+  detailPanelMode,
+}: {
+  selectedPlace: MapSectionPlace;
+  onSelectPlace: (place: MapSectionPlace | null) => void;
+  onSavePlace?: (place: MapSectionPlace) => void;
+  detailPanelMode: DetailPanelMode;
+}) {
+  return (
+    <>
+      <h3
+        style={{
+          fontFamily: 'Cormorant Garamond, Georgia, serif',
+          fontSize: 28,
+          fontWeight: 500,
+          color: '#0E3F2F',
+          marginBottom: 20,
+          lineHeight: 1.3,
+          letterSpacing: '0.01em',
+        }}
+      >
+        {selectedPlace.name}
+      </h3>
+      <p
+        style={{
+          fontFamily: 'Cormorant Garamond, Georgia, serif',
+          fontSize: 17,
+          fontWeight: 300,
+          fontStyle: 'italic',
+          lineHeight: 1.7,
+          color: '#2B2B2B',
+          opacity: 0.8,
+          marginBottom: 28,
+        }}
+      >
+        {selectedPlace.description}
+      </p>
+      {detailPanelMode === 'save' && onSavePlace && (
+        <button
+          type="button"
+          onClick={() => onSavePlace(selectedPlace)}
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 10,
+            fontWeight: 500,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            padding: '14px 28px',
+            background: '#0E3F2F',
+            color: '#FAF9F6',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'background 400ms ease',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = '#0E3F2F'; }}
+        >
+          Save to My Paris
+        </button>
+      )}
+      {detailPanelMode === 'remove' && onSavePlace && (
+        <button
+          type="button"
+          onClick={() => onSavePlace(selectedPlace)}
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 10,
+            fontWeight: 500,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            padding: '14px 28px',
+            background: 'transparent',
+            color: '#0E3F2F',
+            border: '0.5px solid rgba(14, 63, 47, 0.3)',
+            cursor: 'pointer',
+            transition: 'all 400ms ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '0.8';
+            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '1';
+            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
+          }}
+        >
+          Remove from My Paris
+        </button>
+      )}
+    </>
+  );
 }
 
 export function MapSection({
@@ -34,21 +134,23 @@ export function MapSection({
   onSavePlace,
   detailPanelMode = 'none',
   showList = false,
+  mapVariant = 'draw',
 }: MapSectionProps) {
+  const isMobile = useIsMobile();
   const showPanel = selectedPlace && detailPanelMode !== 'none';
   const showOverlay = places.length > 0;
-  const listAside = showList && places.length > 0 && !showPanel;
+  const listAside = !isMobile && showList && places.length > 0 && !showPanel;
 
   return (
     <section
       style={{
-        maxWidth: showPanel ? 1260 : 1080,
+        maxWidth: isMobile ? '100%' : showPanel ? 1260 : 1080,
         margin: '0 auto 100px',
-        padding: '0 40px',
+        padding: isMobile ? '0 24px' : '0 40px',
         display: 'flex',
-        flexDirection: listAside ? 'row' : undefined,
+        flexDirection: isMobile ? 'column' : listAside ? 'row' : undefined,
         flexWrap: listAside ? 'nowrap' : undefined,
-        gap: 100,
+        gap: isMobile ? 24 : 100,
         alignItems: 'flex-start',
         justifyContent: 'center',
         transition: 'all 500ms ease',
@@ -56,20 +158,20 @@ export function MapSection({
     >
       <div
         style={{
-          flex: showPanel ? '0 0 65%' : listAside ? '1 1 auto' : 'none',
+          flex: isMobile ? 'none' : showPanel ? '0 0 65%' : listAside ? '1 1 auto' : 'none',
           background: 'transparent',
           padding: 0,
           display: 'flex',
           justifyContent: 'center',
           transition: 'all 500ms ease',
-          width: showPanel ? 'auto' : '100%',
+          width: isMobile || showPanel ? '100%' : listAside ? 'auto' : '100%',
           minWidth: 0,
           position: 'relative',
           maxWidth: '100%',
         }}
       >
         <div style={{ position: 'relative', width: '100%', maxWidth: '100%' }}>
-          <CarteInteractive />
+          <CarteInteractive variant={mapVariant} />
           {showOverlay && (
             <svg
               viewBox="0 0 2037.566 1615.5"
@@ -131,12 +233,15 @@ export function MapSection({
       {showList && places.length > 0 && (
         <div
           style={{
-            flex: showPanel ? '0 0 0' : '0 0 28%',
-            minWidth: showPanel ? 0 : 180,
-            maxWidth: showPanel ? 0 : 240,
+            flex: isMobile ? 'none' : showPanel ? '0 0 0' : '0 0 28%',
+            minWidth: isMobile ? undefined : showPanel ? 0 : 180,
+            maxWidth: isMobile ? '100%' : showPanel ? 0 : 240,
+            width: isMobile ? '100%' : undefined,
             overflow: 'hidden',
-            borderLeft: showPanel ? 'none' : '0.5px solid rgba(14, 63, 47, 0.2)',
-            paddingLeft: showPanel ? 0 : 24,
+            borderLeft: isMobile || showPanel ? 'none' : '0.5px solid rgba(14, 63, 47, 0.2)',
+            paddingLeft: isMobile ? 0 : showPanel ? 0 : 24,
+            borderTop: isMobile ? '0.5px solid rgba(14, 63, 47, 0.12)' : 'none',
+            paddingTop: isMobile ? 16 : 0,
           }}
         >
           <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
@@ -168,7 +273,31 @@ export function MapSection({
         </div>
       )}
 
-      {showPanel && selectedPlace && (
+      {showPanel && selectedPlace && isMobile && (
+        <Sheet
+          open={!!selectedPlace}
+          onOpenChange={(open) => {
+            if (!open) onSelectPlace(null);
+          }}
+        >
+          <SheetContent
+            side="bottom"
+            className="max-h-[80vh] overflow-y-auto bg-[#FAF9F6] border-t border-[rgba(14,63,47,0.08)]"
+            style={{ maxHeight: '80vh' }}
+          >
+            <div style={{ padding: '24px 24px 32px' }}>
+              <DetailPanelContent
+                selectedPlace={selectedPlace}
+                onSelectPlace={onSelectPlace}
+                onSavePlace={onSavePlace}
+                detailPanelMode={detailPanelMode}
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
+      )}
+
+      {showPanel && selectedPlace && !isMobile && (
         <div
           style={{
             flex: '0 0 38%',
@@ -209,85 +338,12 @@ export function MapSection({
           >
             ×
           </button>
-          <h3
-            style={{
-              fontFamily: 'Cormorant Garamond, Georgia, serif',
-              fontSize: 28,
-              fontWeight: 500,
-              color: '#0E3F2F',
-              marginBottom: 20,
-              lineHeight: 1.3,
-              letterSpacing: '0.01em',
-            }}
-          >
-            {selectedPlace.name}
-          </h3>
-          <p
-            style={{
-              fontFamily: 'Cormorant Garamond, Georgia, serif',
-              fontSize: 17,
-              fontWeight: 300,
-              fontStyle: 'italic',
-              lineHeight: 1.7,
-              color: '#2B2B2B',
-              opacity: 0.8,
-              marginBottom: 28,
-            }}
-          >
-            {selectedPlace.description}
-          </p>
-          {detailPanelMode === 'save' && onSavePlace && (
-            <button
-              type="button"
-              onClick={() => onSavePlace(selectedPlace)}
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                padding: '14px 28px',
-                background: '#0E3F2F',
-                color: '#FAF9F6',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'background 400ms ease',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(14, 63, 47, 0.85)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = '#0E3F2F'; }}
-            >
-              Save to My Paris
-            </button>
-          )}
-          {detailPanelMode === 'remove' && onSavePlace && (
-            <button
-              type="button"
-              onClick={() => onSavePlace(selectedPlace)}
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                padding: '14px 28px',
-                background: 'transparent',
-                color: '#0E3F2F',
-                border: '0.5px solid rgba(14, 63, 47, 0.3)',
-                cursor: 'pointer',
-                transition: 'all 400ms ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.5)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.3)';
-              }}
-            >
-              Remove from My Paris
-            </button>
-          )}
+          <DetailPanelContent
+            selectedPlace={selectedPlace}
+            onSelectPlace={onSelectPlace}
+            onSavePlace={onSavePlace}
+            detailPanelMode={detailPanelMode}
+          />
         </div>
       )}
     </section>

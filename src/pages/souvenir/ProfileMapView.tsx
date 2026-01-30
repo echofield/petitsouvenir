@@ -8,6 +8,8 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
 import { MapSection, MapSectionPlace } from '../../components/souvenir/MapSection';
 import { PlaceDetailSheet } from '../../components/souvenir/PlaceDetailSheet';
+import { Sheet, SheetContent } from '../../components/ui/sheet';
+import { useIsMobile } from '../../components/ui/use-mobile';
 import { getProfileById, getPlacesByProfile, SouvenirPlace } from '../../data/petit-souvenir-types';
 import { addPlace } from '../../utils/souvenir-storage';
 import { isProfileUnlocked, STRIPE_PAYMENT_LINK, unlockProfile } from '../../utils/souvenir-lock';
@@ -17,6 +19,7 @@ export default function ProfileMapView() {
   const { profile: profileId } = useParams<{ profile: string }>();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const isMobile = useIsMobile();
   const profile = profileId ? getProfileById(profileId) : null;
   const unlocked = profileId ? isProfileUnlocked(profileId as 'bohemian' | 'family' | 'night') : false;
   const places = useMemo(
@@ -144,11 +147,12 @@ export default function ProfileMapView() {
       </section>
       <section
         style={{
-          maxWidth: selectedPlace ? 1260 : 1080,
+          maxWidth: isMobile ? '100%' : selectedPlace ? 1260 : 1080,
           margin: '0 auto 100px',
-          padding: '0 40px',
+          padding: isMobile ? '0 24px' : '0 40px',
           display: 'flex',
-          gap: 100,
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: isMobile ? 24 : 100,
           alignItems: 'flex-start',
           justifyContent: 'center',
           transition: 'all 500ms ease',
@@ -156,13 +160,13 @@ export default function ProfileMapView() {
       >
         <div
           style={{
-            flex: selectedPlace ? '0 0 65%' : '1 1 auto',
+            flex: isMobile ? 'none' : selectedPlace ? '0 0 65%' : '1 1 auto',
             background: 'transparent',
             padding: 0,
             display: 'flex',
             justifyContent: 'center',
             transition: 'all 500ms ease',
-            width: selectedPlace ? 'auto' : '100%',
+            width: isMobile ? '100%' : selectedPlace ? 'auto' : '100%',
             minWidth: 0,
             position: 'relative',
             maxWidth: '100%',
@@ -181,18 +185,22 @@ export default function ProfileMapView() {
             }}
             detailPanelMode="none"
             showList={unlocked}
+            mapVariant="heartbeat"
           />
         </div>
 
         {unlocked && places.length > 0 && (
           <div
             style={{
-              flex: selectedPlace ? '0 0 0' : '0 0 28%',
-              minWidth: selectedPlace ? 0 : 180,
-              maxWidth: selectedPlace ? 0 : 240,
+              flex: isMobile ? 'none' : selectedPlace ? '0 0 0' : '0 0 28%',
+              minWidth: isMobile ? undefined : selectedPlace ? 0 : 180,
+              maxWidth: isMobile ? '100%' : selectedPlace ? 0 : 240,
+              width: isMobile ? '100%' : undefined,
               overflow: 'hidden',
-              borderLeft: selectedPlace ? 'none' : '0.5px solid rgba(14, 63, 47, 0.2)',
-              paddingLeft: selectedPlace ? 0 : 24,
+              borderLeft: isMobile || selectedPlace ? 'none' : '0.5px solid rgba(14, 63, 47, 0.2)',
+              paddingLeft: isMobile ? 0 : selectedPlace ? 0 : 24,
+              borderTop: isMobile ? '0.5px solid rgba(14, 63, 47, 0.12)' : 'none',
+              paddingTop: isMobile ? 16 : 0,
               transition: 'all 500ms ease',
             }}
           >
@@ -243,7 +251,7 @@ export default function ProfileMapView() {
           </div>
         )}
 
-        {selectedPlace && unlocked && (
+        {!isMobile && selectedPlace && unlocked && (
           <PlaceDetailSheet
             place={selectedPlace}
             profileId={profileId!}
@@ -253,6 +261,33 @@ export default function ProfileMapView() {
           />
         )}
       </section>
+
+      {isMobile && (
+        <Sheet
+          open={!!selectedPlace && unlocked}
+          onOpenChange={(open) => {
+            if (!open) setSelectedPlace(null);
+          }}
+        >
+          <SheetContent
+            side="bottom"
+            className="max-h-[80vh] overflow-y-auto bg-[#FAF9F6] border-t border-[rgba(14,63,47,0.08)]"
+            style={{ maxHeight: '80vh' }}
+          >
+            {selectedPlace && unlocked && (
+              <div style={{ padding: '24px 24px 32px' }}>
+                <PlaceDetailSheet
+                  place={selectedPlace}
+                  profileId={profileId!}
+                  onClose={() => setSelectedPlace(null)}
+                  onSave={handleSave}
+                  mode="save"
+                />
+              </div>
+            )}
+          </SheetContent>
+        </Sheet>
+      )}
     </>
   );
 }

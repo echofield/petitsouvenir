@@ -230,6 +230,7 @@ function QuestTraceView({ payload }: { payload: SharedTracePayload }) {
           onSelectPlace={() => {}}
           detailPanelMode="none"
           showList={false}
+          mapVariant="static"
         />
       )}
 
@@ -456,6 +457,7 @@ function MapShareView({ payload }: { payload: SharedMapPayload }) {
           onSelectPlace={() => {}}
           detailPanelMode="none"
           showList={false}
+          mapVariant="static"
         />
       )}
 

@@ -1,18 +1,18 @@
 /**
  * Petit Souvenir — Minimal Footer
- * Quiet legitimacy for trust + realness.
+ * Manifesto + Privacy only. Contribute not linked (route kept).
  */
 
 import { Link, useLocation } from 'react-router-dom';
+import { NAV } from '../../config/nav';
 
 export function Footer() {
   const location = useLocation();
-  
-  // Hide footer on /arche (preserved ARCHÉ experience) and /t (shared trace page is self-contained)
+
   if (location.pathname.startsWith('/arche') || location.pathname.startsWith('/t/')) {
     return null;
   }
-  
+
   const linkStyle = {
     fontFamily: 'Inter, sans-serif',
     fontSize: 9,
@@ -43,30 +43,17 @@ export function Footer() {
         }}
       >
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 32 }}>
-          <Link
-            to="/about"
-            style={linkStyle}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
-          >
-            About
-          </Link>
-          <Link
-            to="/contribute"
-            style={linkStyle}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
-          >
-            Contribute
-          </Link>
-          <Link
-            to="/privacy"
-            style={linkStyle}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
-          >
-            Privacy
-          </Link>
+          {NAV.footer.map(({ label, href }) => (
+            <Link
+              key={href}
+              to={href}
+              style={linkStyle}
+              onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.6'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.4'; }}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
         <p
           style={{

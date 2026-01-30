@@ -39,7 +39,7 @@ export default function SouvenirHome() {
             fontStyle: 'italic',
             color: '#2B2B2B',
             opacity: 0.7,
-            marginBottom: 48,
+            marginBottom: 28,
             lineHeight: 1.8,
           }}
         >
@@ -66,7 +66,7 @@ export default function SouvenirHome() {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.opacity = '1';
-            e.currentTarget.style.borderColor = 'rgba(14, 63, 47, 0.4)';
+            e.currentTarget.style.borderColor = 'rgba(201, 169, 97, 0.35)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.opacity = '0.9';
@@ -77,13 +77,14 @@ export default function SouvenirHome() {
         </Link>
       </section>
 
-      {/* Map (centered, breathing space) */}
-      <section style={{ padding: '60px 0' }}>
+      {/* Map (centered, tighter spacing so map sits higher) */}
+      <section style={{ padding: '40px 0' }}>
         <MapSection
           places={[]}
           selectedPlace={null}
           onSelectPlace={() => {}}
           detailPanelMode="none"
+          mapVariant="draw"
         />
       </section>
     </>

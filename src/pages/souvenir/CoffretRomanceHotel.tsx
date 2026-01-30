@@ -241,6 +241,7 @@ export default function CoffretRomanceHotel() {
           onSelectPlace={setSelectedPlace}
           detailPanelMode="none"
           showList={false}
+          mapVariant="heartbeat"
         />
       )}
 

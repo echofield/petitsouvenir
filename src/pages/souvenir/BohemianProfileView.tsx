@@ -13,16 +13,18 @@ import { CategorySwitcher } from '../../components/souvenir/CategorySwitcher';
 import { CompanionCard } from '../../components/souvenir/CompanionCard';
 import { QuestsSection } from '../../components/souvenir/QuestsSection';
 import { QuestPreview } from '../../components/souvenir/QuestPreview';
+import { Sheet, SheetContent } from '../../components/ui/sheet';
+import { useIsMobile } from '../../components/ui/use-mobile';
 import { getBohemianProfile, BohemianPlace } from '../../data/bohemian-types';
 import { addPlace } from '../../utils/souvenir-storage';
 import { isProfileUnlocked, STRIPE_PAYMENT_LINK, unlockProfile } from '../../utils/souvenir-lock';
 import { hasProof } from '../../utils/souvenir-proof';
 
 export default function BohemianProfileView() {
-  // This is a fixed route /souvenir/bohemian, so profileId is always 'bohemian'
   const profileId = 'bohemian';
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const isMobile = useIsMobile();
   const companionsRef = useRef<HTMLDivElement>(null);
   const questsRef = useRef<HTMLDivElement>(null);
   const presetId = searchParams.get('preset');
@@ -243,11 +245,12 @@ export default function BohemianProfileView() {
       {selectedCategory !== 'companions' && (
         <section
           style={{
-            maxWidth: selectedPlace ? 1260 : 1080,
+            maxWidth: isMobile ? '100%' : selectedPlace ? 1260 : 1080,
             margin: '0 auto 100px',
-            padding: '0 40px',
+            padding: isMobile ? '0 24px' : '0 40px',
             display: 'flex',
-            gap: 100,
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: isMobile ? 24 : 100,
             alignItems: 'flex-start',
             justifyContent: 'center',
             transition: 'all 500ms ease',
@@ -255,13 +258,13 @@ export default function BohemianProfileView() {
         >
           <div
             style={{
-              flex: selectedPlace ? '0 0 65%' : '1 1 auto',
+              flex: isMobile ? 'none' : selectedPlace ? '0 0 65%' : '1 1 auto',
               background: 'transparent',
               padding: 0,
               display: 'flex',
               justifyContent: 'center',
               transition: 'all 500ms ease',
-              width: selectedPlace ? 'auto' : '100%',
+              width: isMobile ? '100%' : selectedPlace ? 'auto' : '100%',
               minWidth: 0,
               position: 'relative',
               maxWidth: '100%',
@@ -280,6 +283,7 @@ export default function BohemianProfileView() {
               }}
               detailPanelMode="none"
               showList={false}
+              mapVariant="heartbeat"
             />
           </div>
 
@@ -287,12 +291,15 @@ export default function BohemianProfileView() {
           {unlocked && allPlacesForList.length > 0 && (
             <div
               style={{
-                flex: selectedPlace ? '0 0 0' : '0 0 28%',
-                minWidth: selectedPlace ? 0 : 240,
-                maxWidth: selectedPlace ? 0 : 320,
+                flex: isMobile ? 'none' : selectedPlace ? '0 0 0' : '0 0 28%',
+                minWidth: isMobile ? undefined : selectedPlace ? 0 : 240,
+                maxWidth: isMobile ? '100%' : selectedPlace ? 0 : 320,
+                width: isMobile ? '100%' : undefined,
                 overflow: 'hidden',
-                borderLeft: selectedPlace ? 'none' : '0.5px solid rgba(14, 63, 47, 0.2)',
-                paddingLeft: selectedPlace ? 0 : 24,
+                borderLeft: isMobile || selectedPlace ? 'none' : '0.5px solid rgba(14, 63, 47, 0.2)',
+                paddingLeft: isMobile ? 0 : selectedPlace ? 0 : 24,
+                borderTop: isMobile ? '0.5px solid rgba(14, 63, 47, 0.12)' : 'none',
+                paddingTop: isMobile ? 16 : 0,
                 transition: 'all 500ms ease',
               }}
             >
@@ -366,8 +373,8 @@ export default function BohemianProfileView() {
             </div>
           )}
 
-          {/* Place Detail Sheet */}
-          {selectedPlace && unlocked && selectedPlace.x !== undefined && selectedPlace.y !== undefined && (
+          {/* Place Detail Sheet (desktop: inline; mobile: bottom sheet) */}
+          {!isMobile && selectedPlace && unlocked && selectedPlace.x !== undefined && selectedPlace.y !== undefined && (
             <BohemianPlaceDetailSheet
               place={selectedPlace}
               profileId={profileId!}
@@ -377,6 +384,33 @@ export default function BohemianProfileView() {
             />
           )}
         </section>
+      )}
+
+      {isMobile && (
+        <Sheet
+          open={!!selectedPlace && unlocked && selectedPlace.x !== undefined && selectedPlace.y !== undefined}
+          onOpenChange={(open) => {
+            if (!open) setSelectedPlace(null);
+          }}
+        >
+          <SheetContent
+            side="bottom"
+            className="max-h-[80vh] overflow-y-auto bg-[#FAF9F6] border-t border-[rgba(14,63,47,0.08)]"
+            style={{ maxHeight: '80vh' }}
+          >
+            {selectedPlace && unlocked && selectedPlace.x !== undefined && selectedPlace.y !== undefined && (
+              <div style={{ padding: '24px 24px 32px' }}>
+                <BohemianPlaceDetailSheet
+                  place={selectedPlace}
+                  profileId={profileId!}
+                  onClose={() => setSelectedPlace(null)}
+                  onSave={handleSave}
+                  mode="save"
+                />
+              </div>
+            )}
+          </SheetContent>
+        </Sheet>
       )}
 
       {/* Companions Section */}

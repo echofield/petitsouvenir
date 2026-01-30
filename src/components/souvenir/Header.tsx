@@ -1,22 +1,25 @@
 /**
  * Petit Souvenir — Brand Header
  * Minimal, quiet, editorial. Not SaaS.
+ * Primary nav: Explore, Experiences, My Paris. Nav hidden on mobile (tab bar used).
  */
 
 import { Link, useLocation } from 'react-router-dom';
+import { useIsMobile } from '../ui/use-mobile';
+import { NAV } from '../../config/nav';
+
+function isPrimaryActive(pathname: string, href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
 
 export function Header() {
   const location = useLocation();
-  
-  // Hide header on /arche (preserved ARCHÉ experience) and /t (shared trace page is self-contained)
+  const isMobile = useIsMobile();
+
   if (location.pathname.startsWith('/arche') || location.pathname.startsWith('/t/')) {
     return null;
   }
-  
-  const isActive = (path: string) => location.pathname === path;
-  const isCoffretActive = location.pathname.startsWith('/coffret');
-  const isContributeActive = location.pathname === '/contribute';
-  const isPrivacyActive = location.pathname === '/privacy';
 
   return (
     <header
@@ -38,7 +41,6 @@ export function Header() {
           alignItems: 'center',
         }}
       >
-        {/* Left: Brand */}
         <Link
           to="/"
           style={{
@@ -46,7 +48,7 @@ export function Header() {
             fontSize: 20,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: '#C9A961',
+            color: 'var(--accent-gold, #C9A961)',
             textDecoration: 'none',
             opacity: 0.9,
           }}
@@ -54,212 +56,55 @@ export function Header() {
           Petit Souvenir
         </Link>
 
-        {/* Center: Paris (optional, subtle) */}
-        <div
-          style={{
-            fontFamily: 'Cormorant Garamond, Georgia, serif',
-            fontSize: 14,
-            fontWeight: 300,
-            fontStyle: 'italic',
-            color: '#2B2B2B',
-            opacity: 0.4,
-            letterSpacing: '0.05em',
-          }}
-        >
-          Paris
-        </div>
-
-        {/* Right: Nav */}
-        <nav
-          style={{
-            display: 'flex',
-            gap: 32,
-            alignItems: 'center',
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isActive('/') ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: isActive('/') ? '#2B2B2B' : '#2B2B2B',
-              opacity: isActive('/') ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isActive('/')) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive('/')) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            Map
-          </Link>
-          <Link
-            to="/souvenir"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isActive('/souvenir') ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              opacity: isActive('/souvenir') ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isActive('/souvenir')) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive('/souvenir')) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            Profiles
-          </Link>
-          <Link
-            to="/create"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isActive('/create') ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              opacity: isActive('/create') ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isActive('/create')) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive('/create')) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            My Map
-          </Link>
-          <Link
-            to="/coffret"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isCoffretActive ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              opacity: isCoffretActive ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isCoffretActive) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isCoffretActive) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            COFFRET
-          </Link>
-          <Link
-            to="/contribute"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isContributeActive ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              opacity: isContributeActive ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isContributeActive) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isContributeActive) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            Contribute
-          </Link>
-          <Link
-            to="/about"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isActive('/about') ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              opacity: isActive('/about') ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isActive('/about')) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive('/about')) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            About
-          </Link>
-          <Link
-            to="/privacy"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 10,
-              fontWeight: isPrivacyActive ? 500 : 400,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#2B2B2B',
-              opacity: isPrivacyActive ? 0.9 : 0.5,
-              textDecoration: 'none',
-              transition: 'opacity 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              if (!isPrivacyActive) {
-                e.currentTarget.style.opacity = '0.7';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isPrivacyActive) {
-                e.currentTarget.style.opacity = '0.5';
-              }
-            }}
-          >
-            Privacy
-          </Link>
-        </nav>
+        {!isMobile && (
+          <>
+            <div
+              style={{
+                fontFamily: 'Cormorant Garamond, Georgia, serif',
+                fontSize: 14,
+                fontWeight: 300,
+                fontStyle: 'italic',
+                color: '#2B2B2B',
+                opacity: 0.4,
+                letterSpacing: '0.05em',
+              }}
+            >
+              Paris
+            </div>
+            <nav style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
+              {NAV.primary.map(({ label, href }) => {
+                const active = isPrimaryActive(location.pathname, href);
+                return (
+                  <Link
+                    key={href}
+                    to={href}
+                    style={{
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: 10,
+                      fontWeight: active ? 500 : 400,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: '#2B2B2B',
+                      opacity: active ? 0.95 : 0.55,
+                      textDecoration: active ? 'underline' : 'none',
+                      textDecorationColor: 'var(--accent-gold, #C9A961)',
+                      textUnderlineOffset: 4,
+                      transition: 'opacity 300ms ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!active) e.currentTarget.style.opacity = '0.75';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!active) e.currentTarget.style.opacity = '0.55';
+                    }}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </>
+        )}
       </div>
     </header>
   );

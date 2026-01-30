@@ -1,19 +1,128 @@
 /**
- * CARTE INTERACTIVE — ARCHÉ
- * Carte SVG de Paris avec animations éditoriales subtiles
- * Style : manuscrit vivant, gravure ancienne
+ * CARTE INTERACTIVE — ARCHÉ / Petit Souvenir
+ * Carte SVG de Paris avec animations éditoriales subtiles.
+ * variant: draw (home) | heartbeat (profiles, My Paris, etc.) | static (shared, share).
  */
 
-export function CarteInteractive() {
+export type MapVariant = 'draw' | 'heartbeat' | 'static';
+
+export interface CarteInteractiveProps {
+  variant?: MapVariant;
+}
+
+export function CarteInteractive({ variant = 'draw' }: CarteInteractiveProps) {
+  const isDraw = variant === 'draw';
+  const isHeartbeat = variant === 'heartbeat';
+
   return (
-    <div 
-      style={{ 
-        color: '#0E3F2F', 
-        width: '100%', 
-        maxWidth: '100%'
+    <div
+      className={isHeartbeat ? 'carte-heartbeat' : undefined}
+      style={{
+        color: '#0E3F2F',
+        width: '100%',
+        maxWidth: '100%',
       }}
     >
+      <style>
+        {`
+          /* Draw: progressive stroke animation (home) */
+          @keyframes drawMap {
+            from { stroke-dashoffset: 2000; }
+            to { stroke-dashoffset: 0; }
+          }
+
+          /* Heartbeat: subtle pulse on map container */
+          @keyframes mapHeartbeat {
+            0%, 100% { transform: scale(1); opacity: 0.98; }
+            50% { transform: scale(1.012); opacity: 1; }
+          }
+          .carte-heartbeat {
+            animation: mapHeartbeat 2.4s ease-in-out infinite;
+            display: block;
+            width: 100%;
+            max-width: 100%;
+          }
+
+          /* Base stroke styles */
+          #paris-map-strokes polyline,
+          #paris-map-strokes path,
+          #paris-map-strokes polygon {
+            stroke: currentColor;
+            fill: none;
+            opacity: 0.6;
+            transition: all 400ms ease;
+            stroke-dasharray: 2000;
+          }
+
+          /* Draw: animate strokes */
+          .carte-variant-draw #paris-map-strokes polyline,
+          .carte-variant-draw #paris-map-strokes path,
+          .carte-variant-draw #paris-map-strokes polygon {
+            stroke-dashoffset: 2000;
+            animation: drawMap 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+          .carte-variant-draw #outer-border polyline,
+          .carte-variant-draw #outer-border path {
+            animation-delay: 0s;
+            animation-duration: 2s;
+          }
+          .carte-variant-draw #bois-de-boulogne path {
+            animation-delay: 0.5s;
+            animation-duration: 2.5s;
+          }
+          .carte-variant-draw #districts-boundaries polyline,
+          .carte-variant-draw #districts-boundaries path,
+          .carte-variant-draw #districts-boundaries polygon {
+            animation-delay: 1s;
+            animation-duration: 3s;
+          }
+
+          /* Static / Heartbeat: no draw, strokes visible */
+          .carte-variant-static #paris-map-strokes polyline,
+          .carte-variant-static #paris-map-strokes path,
+          .carte-variant-static #paris-map-strokes polygon,
+          .carte-heartbeat #paris-map-strokes polyline,
+          .carte-heartbeat #paris-map-strokes path,
+          .carte-heartbeat #paris-map-strokes polygon {
+            stroke-dashoffset: 0;
+          }
+
+          /* Hover states */
+          @media (hover: hover) {
+            #paris-map-strokes polyline:hover,
+            #paris-map-strokes path:hover,
+            #paris-map-strokes polygon:hover {
+              opacity: 1;
+              stroke-width: 4;
+              cursor: pointer;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .carte-interactive-svg {
+              padding: 0 24px;
+              max-height: 70vh;
+            }
+            @media (hover: none) {
+              #paris-map-strokes polyline:hover,
+              #paris-map-strokes path:hover,
+              #paris-map-strokes polygon:hover {
+                stroke-width: 3;
+                opacity: 0.6;
+              }
+            }
+          }
+
+          @media (min-width: 769px) {
+            .carte-interactive-svg {
+              max-width: 1080px;
+              margin: 0 auto;
+            }
+          }
+        `}
+      </style>
       <svg
+        className={`carte-interactive-svg carte-variant-${isDraw ? 'draw' : 'static'}`}
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2037.566 1615.5"
@@ -23,91 +132,9 @@ export function CarteInteractive() {
           maxWidth: '100%',
           height: 'auto',
           display: 'block',
-          maxHeight: '72vh'
+          maxHeight: '72vh',
         }}
       >
-        <style>
-          {`
-            /* Animation de tracé progressif — encre qui se dessine */
-            @keyframes drawMap {
-              from {
-                stroke-dashoffset: 2000;
-              }
-              to {
-                stroke-dashoffset: 0;
-              }
-            }
-
-            /* Styles de base pour tous les éléments */
-            #paris-map-strokes polyline,
-            #paris-map-strokes path,
-            #paris-map-strokes polygon {
-              stroke: currentColor;
-              fill: none;
-              opacity: 0.6;
-              transition: all 400ms ease;
-              stroke-dasharray: 2000;
-              stroke-dashoffset: 2000;
-              animation: drawMap 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-
-            /* Délais progressifs par groupe */
-            #outer-border polyline,
-            #outer-border path {
-              animation-delay: 0s;
-              animation-duration: 2s;
-            }
-
-            #bois-de-boulogne path {
-              animation-delay: 0.5s;
-              animation-duration: 2.5s;
-            }
-
-            #districts-boundaries polyline,
-            #districts-boundaries path,
-            #districts-boundaries polygon {
-              animation-delay: 1s;
-              animation-duration: 3s;
-            }
-
-            /* Hover states — épaississement léger */
-            @media (hover: hover) {
-              #paris-map-strokes polyline:hover,
-              #paris-map-strokes path:hover,
-              #paris-map-strokes polygon:hover {
-                opacity: 1;
-                stroke-width: 4;
-                cursor: pointer;
-              }
-            }
-
-            /* Responsive mobile */
-            @media (max-width: 768px) {
-              svg {
-                padding: 0 24px;
-                max-height: 70vh;
-              }
-              
-              /* Désactiver hover sur tactile */
-              @media (hover: none) {
-                #paris-map-strokes polyline:hover,
-                #paris-map-strokes path:hover,
-                #paris-map-strokes polygon:hover {
-                  stroke-width: 3;
-                  opacity: 0.6;
-                }
-              }
-            }
-            
-            /* Desktop - limiter la taille maximale */
-            @media (min-width: 769px) {
-              svg {
-                max-width: 1080px;
-                margin: 0 auto;
-              }
-            }
-          `}
-        </style>
 
         <g id="paris-map-strokes">
           {/* Group 1: Outer border / River segments */}

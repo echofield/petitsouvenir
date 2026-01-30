@@ -110,6 +110,7 @@ export default function MyParis() {
         onSavePlace={handleRemove}
         detailPanelMode="remove"
         showList
+        mapVariant="heartbeat"
       />
       <section
         style={{

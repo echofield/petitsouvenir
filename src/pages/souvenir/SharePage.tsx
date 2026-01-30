@@ -52,6 +52,7 @@ export default function SharePage() {
       </section>
       {places.length > 0 ? (
         <MapSection
+          mapVariant="static"
           places={places}
           selectedPlace={null}
           onSelectPlace={() => {}}
